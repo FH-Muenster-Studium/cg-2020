@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Triangle</title>
+    <meta charset="UTF-8" />
+
+    <!-- using glMatrix (http://glmatrix.net/) for Vector and Matrix operations in JS -->
+    <script src="./gl-matrix.js" type="text/javascript"></script>
+
+    <script src="./triangle.js" type="text/javascript"></script>
+    <script src="./webglstart.js" type="text/javascript"></script>
+
+    <script src="./square.js" type="text/javascript"></script>
+    <script src="./rectangle.js" type="text/javascript"></script>
+    <script src="./cuboid.js" type="text/javascript"></script>
+    <script src="./cube.js" type="text/javascript"></script>
+
+    <script src="./keyboarddemo.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var keyboardDemo = new KeyboardDemo();
+        keyboardDemo.registerEvents();
+    </script>
+
+
+    <!-- Vertex Shader-->
+    <script id="shader-vs" type="x-shader/x-vertex">
+        attribute vec3 aVertexPosition;
+        uniform mat4 uModelViewMatrix;
+        uniform mat4 uProjectionMatrix;
+
+		varying vec4 v_position;
+
+        void main(void) {
+            gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
+			v_position = gl_Position;
+        }
+       </script>
+
+    <!-- Fragment Shader-->
+    <script id="shader-fs" type="x-shader/x-fragment">
+        #ifdef GL_ES
+            precision mediump float;
+        #endif
+
+		varying vec4 v_position;
+        void main(void) {
+
+			  vec4 color = v_position + vec4(0.75, 0.75, 0.0, 0.0);
+ 			 gl_FragColor = color;
+        }
+        </script>
+
+
+</head>
+<body onload="webGLStart();">
+<canvas id="glCanvas" style="border: none;" width="500" height="500"></canvas>
+</body>
+</html>
