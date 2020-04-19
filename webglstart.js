@@ -5,6 +5,7 @@ var square;
 var cube;
 var shaderProgram;
 var modelViewMatrix = mat4.create();
+var rotationMatrix = mat4.create();
 var projectionMatrix = mat4.create();
 
 // Globale Funktionen:
@@ -78,6 +79,7 @@ function initShaders() {
 
     shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uProjectionMatrix");
     shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "uModelViewMatrix");
+    shaderProgram.rMatrixUniform = gl.getUniformLocation(shaderProgram, "uRotationMatrix");
 }
 
 function getShaderFromHTML(id) {
@@ -121,10 +123,11 @@ function drawScene() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     mat4.identity(projectionMatrix);
-    //mat4.identity(modelViewMatrix);
+    mat4.identity(modelViewMatrix);
 
     gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projectionMatrix);
     gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelViewMatrix);
+    gl.uniformMatrix4fv(shaderProgram.rMatrixUniform, false, rotationMatrix);
 
     //triangle.draw();
     //square.draw();
