@@ -1,7 +1,8 @@
+import Cube from "./cube.js";
+import {vec3, mat4} from "./gl-matrix";
+
 // Globale Variablen:
 var gl;
-var triangle;
-var square;
 var cube;
 var shaderProgram;
 var modelViewMatrix = mat4.create();
@@ -9,7 +10,7 @@ var rotationMatrix = mat4.create();
 var projectionMatrix = mat4.create();
 
 // Globale Funktionen:
-function webGLStart() {
+export function webGLStart() {
     var canvas = document.getElementById("glCanvas");
     initGL(canvas);
     initShaders();
@@ -40,8 +41,6 @@ function webGLStart() {
     var v6 = vec3.create();
     vec3.set(v6, 0.75, -0.75, 0.75);
 
-    triangle = new Triangle(v1,v2,v3);
-    square = new Square(v1, v2, v3);
     cube = new Cube(v4,v5,v6);
 
     drawScene();
@@ -129,10 +128,10 @@ function drawScene() {
     gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelViewMatrix);
     gl.uniformMatrix4fv(shaderProgram.rMatrixUniform, false, rotationMatrix);
 
-    //triangle.draw();
-    //square.draw();
     cube.draw();
 
     // Ermöglicht Echtzeit Rendering und Animation
     window.requestAnimationFrame(drawScene);
 }
+
+export {gl, shaderProgram, rotationMatrix};

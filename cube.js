@@ -1,4 +1,7 @@
-class Cube extends Cuboid {
+import Cuboid from "./cuboid.js";
+import {vec3} from "./gl-matrix";
+
+export default class Cube extends Cuboid {
     /*constructor(p) {
         // front
         var v1 = vec3.create();

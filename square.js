@@ -1,4 +1,7 @@
-class Square {
+import Triangle from "./triangle.js";
+import {vec3} from "./gl-matrix";
+
+export default class Square {
     constructor(v1, v2, v3) {
         let v4 = vec3.create();
         let multiply = vec3.create();

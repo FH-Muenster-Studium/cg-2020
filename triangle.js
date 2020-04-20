@@ -1,4 +1,6 @@
-class Triangle{
+import {gl, shaderProgram} from "./webglstart.js";
+
+export default class Triangle {
     
     constructor(v1, v2, v3){
         this.vertices = [
@@ -16,7 +18,7 @@ class Triangle{
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
     }
 
-    draw(){
+    draw() {
         //bindBuffer() immer vor vertexAttribPointer() ausführen,
         //damit der gebundene Buffer in die zugehörige Shader Variable geladen wird!
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
