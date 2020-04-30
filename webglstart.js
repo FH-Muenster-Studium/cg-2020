@@ -5,7 +5,6 @@ var square;
 var cube;
 var shaderProgram;
 var modelViewMatrix = mat4.create();
-var rotationMatrix = mat4.create();
 var projectionMatrix = mat4.create();
 
 // Globale Funktionen:
@@ -31,18 +30,12 @@ function webGLStart() {
     var v3 = vec3.create();
     vec3.set(v3, 0.75, -0.75, 0.0);
 
-    var v4 = vec3.create();
-    vec3.set(v4, -0.75, 0.75, 0.75);
+    var nullvec = vec3.create();
+    vec3.set(nullvec, 0, 0, 0);
 
-    var v5 = vec3.create();
-    vec3.set(v5, -0.75, -0.75, -0.75);
-
-    var v6 = vec3.create();
-    vec3.set(v6, 0.75, -0.75, 0.75);
-
-    triangle = new Triangle(v1,v2,v3);
-    square = new Square(v1, v2, v3);
-    cube = new Cube(v4,v5,v6);
+    //triangle = new Triangle(v1,v2,v3);
+    //square = new Square(v1, v2, v3);
+    cube = new Cube(nullvec, 1.5);
 
     drawScene();
 }
@@ -79,7 +72,6 @@ function initShaders() {
 
     shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uProjectionMatrix");
     shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "uModelViewMatrix");
-    shaderProgram.rMatrixUniform = gl.getUniformLocation(shaderProgram, "uRotationMatrix");
 }
 
 function getShaderFromHTML(id) {
@@ -118,16 +110,15 @@ function getShaderFromHTML(id) {
 }
 
 function drawScene() {
-    console.log("draw:" + modelViewMatrix);
+    //console.log("draw:" + modelViewMatrix);
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     mat4.identity(projectionMatrix);
-    mat4.identity(modelViewMatrix);
+    //mat4.identity(modelViewMatrix);
 
     gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projectionMatrix);
     gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelViewMatrix);
-    gl.uniformMatrix4fv(shaderProgram.rMatrixUniform, false, rotationMatrix);
 
     //triangle.draw();
     //square.draw();
