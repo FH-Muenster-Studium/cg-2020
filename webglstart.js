@@ -127,4 +127,4 @@ function drawScene() {
     window.requestAnimationFrame(drawScene);
 }
 
-export {gl, shaderProgram, rotationMatrix};
+export {gl, shaderProgram, modelViewMatrix};

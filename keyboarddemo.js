@@ -1,4 +1,4 @@
-import {rotationMatrix} from "./webglstart.js";
+import {modelViewMatrix} from "./webglstart.js";
 import {mat4} from "./gl-matrix";
 
 class KeyboardDemo {
