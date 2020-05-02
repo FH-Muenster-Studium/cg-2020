@@ -1,11 +1,20 @@
+import MatrixStack from "../matrix-stack/matrixstack.js";
+import * as mat4 from "../gl-matrix/mat4.js";
+import {gl, shaderProgram} from "../webglstart.js";
+
 export default class SceneGraph {
 
     constructor(rootNode) {
         this.root = rootNode;
         this.logString = "";
+        this.matrixStack = new MatrixStack();
+        this.modelViewMatrix = mat4.create();
     }
 
     drawTraversal(node) {
+        mat4.multiply(this.modelViewMatrix, this.modelViewMatrix, node.modelViewMatrix);
+        this.matrixStack.push(this.modelViewMatrix);
+
 
         this.logString += "{"
 
@@ -19,9 +28,17 @@ export default class SceneGraph {
             this.drawTraversal(children[c]);
 
         }
+        this.matrixStack.pop();
         this.logString += "]";
 
         this.logString += "}";
+
+        /* draw the node after leaving it */
+        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.modelViewMatrix);
+        node.draw();
+
+        /* set the local matrix to the matrix of the parent */
+        this.modelViewMatrix = this.matrixStack.top();
     }
 
     draw() {
@@ -32,6 +49,7 @@ export default class SceneGraph {
 
         console.log("Bspl: {Knoten,[{Kind,[]}]}");
 
+        mat4.identity(this.modelViewMatrix);
         this.drawTraversal(this.root);
 
         console.log(this.logString);
