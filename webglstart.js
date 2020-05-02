@@ -31,12 +31,9 @@ export function webGLStart() {
     var v3 = vec3.create();
     vec3.set(v3, 0.75, -0.75, 0.0);
 
-    var nullvec = vec3.create();
-    vec3.set(nullvec, 0, 0, 0);
-
     //triangle = new Triangle(v1,v2,v3);
     //square = new Square(v1, v2, v3);
-    cube = new Cube(nullvec, 1.5);
+    cube = new Cube(1.5);
 
     drawScene();
 }

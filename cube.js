@@ -3,8 +3,8 @@ import {vec3} from "./gl-matrix";
 
 export default class Cube extends Cuboid {
 
-    constructor(center, diameter) {
-        var extent = diameter/2;
+    constructor(diameter) {
+        const extent = diameter / 2;
         let ver1 = vec3.create();
         let ver2 = vec3.create();
         let ver3 = vec3.create();
