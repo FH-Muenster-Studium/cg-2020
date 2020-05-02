@@ -1,4 +1,7 @@
-class KeyboardDemo{
+import {modelViewMatrix} from "./webglstart.js";
+import {mat4} from "./gl-matrix";
+
+class KeyboardDemo {
 
     constructor() {
         this.rotateX = 0;
@@ -6,8 +9,10 @@ class KeyboardDemo{
         this.rotateZ = 0;
     }
 
-    registerEvents(){
-        document.addEventListener('keydown', function(event) { Key.keyControl(event); });
+    registerEvents() {
+        document.addEventListener('keydown', function (event) {
+            Key.keyControl(event);
+        });
 
         var Key = {
             keyboardDemo: this,
@@ -19,7 +24,7 @@ class KeyboardDemo{
     }
 
     doSomething(code) {
-        var r = 0.1;
+        const r = 0.1;
         //console.log(code);
         switch (code) {
             case 37:
@@ -56,3 +61,5 @@ class KeyboardDemo{
         }
     }
 }
+
+export default new KeyboardDemo();

@@ -1,4 +1,6 @@
-class Triangle {
+import {gl, shaderProgram} from "./webglstart.js";
+
+export default class Triangle {
 
     constructor(v1, v2, v3) {
         this.vertices = [

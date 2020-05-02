@@ -1,4 +1,6 @@
-class Cuboid {
+import Rectangle from "./rectangle.js";
+
+export default class Cuboid {
 
     constructor(ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8) {
         this.rec1 = new Rectangle(ver1, ver2, ver3, ver4);

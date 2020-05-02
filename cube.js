@@ -1,4 +1,7 @@
-class Cube extends Cuboid {
+import Cuboid from "./cuboid.js";
+import {vec3} from "./gl-matrix";
+
+export default class Cube extends Cuboid {
 
     constructor(center, diameter) {
         var extent = diameter/2;
@@ -22,5 +25,4 @@ class Cube extends Cuboid {
 
         super(ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8);
     }
-
 }

@@ -3,25 +3,13 @@
 <head>
     <title>Triangle</title>
     <meta charset="UTF-8" />
+    <script type="module">
+        import {webGLStart} from "./webglstart.js";
+        import keyboardDemo from "./keyboarddemo.js";
 
-    <!-- using glMatrix (http://glmatrix.net/) for Vector and Matrix operations in JS -->
-    <script src="./gl-matrix.js" type="text/javascript"></script>
-
-    <script src="./triangle.js" type="text/javascript"></script>
-    <script src="./webglstart.js" type="text/javascript"></script>
-
-    <script src="./square.js" type="text/javascript"></script>
-    <script src="./rectangle.js" type="text/javascript"></script>
-    <script src="./cuboid.js" type="text/javascript"></script>
-    <script src="./cube.js" type="text/javascript"></script>
-
-    <script src="./keyboarddemo.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
-        var keyboardDemo = new KeyboardDemo();
+        document.body.onload = webGLStart;
         keyboardDemo.registerEvents();
     </script>
-
 
     <!-- Vertex Shader-->
     <script id="shader-vs" type="x-shader/x-vertex">
@@ -52,7 +40,7 @@
 
 
 </head>
-<body onload="webGLStart();">
+<body>
 <canvas id="glCanvas" style="border: none;" width="500" height="500"></canvas>
 </body>
 </html>
