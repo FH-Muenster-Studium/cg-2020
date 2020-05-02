@@ -25,38 +25,39 @@ class KeyboardDemo {
 
     doSomething(code) {
         const r = 0.1;
-        console.log(code);
+        //console.log(code);
         switch (code) {
             case 37:
                 // left arrow
                 this.rotateY = r;
-                mat4.rotateY(rotationMatrix, rotationMatrix, this.rotateY);
+                mat4.rotateY(modelViewMatrix, modelViewMatrix, this.rotateY);
                 break;
             case 39:
                 // right arrow
                 this.rotateY = -r;
-                mat4.rotateY(rotationMatrix, rotationMatrix, this.rotateY);
+                mat4.rotateY(modelViewMatrix, modelViewMatrix, this.rotateY);
                 break;
             case 38:
                 // up arrow
                 this.rotateX = r;
-                mat4.rotateX(rotationMatrix, rotationMatrix, this.rotateX);
+                mat4.rotateX(modelViewMatrix, modelViewMatrix, this.rotateX);
                 break;
             case 40:
                 // down arrow
                 this.rotateX = -r;
-                mat4.rotateX(rotationMatrix, rotationMatrix, this.rotateX);
-                break;
-            case 81:
-                // q
-                this.rotateZ = -r;
-                mat4.rotateZ(rotationMatrix, rotationMatrix, this.rotateZ);
+                mat4.rotateX(modelViewMatrix, modelViewMatrix, this.rotateX);
                 break;
             case 69:
                 // e
                 this.rotateZ = r;
-                mat4.rotateZ(rotationMatrix, rotationMatrix, this.rotateZ);
+                mat4.rotateZ(modelViewMatrix, modelViewMatrix, this.rotateZ);
+                break;    
+            case 81:
+                // q
+                this.rotateZ = -r;
+                mat4.rotateZ(modelViewMatrix, modelViewMatrix, this.rotateZ);
                 break;
+
         }
     }
 }
