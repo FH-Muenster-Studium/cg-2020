@@ -33,7 +33,7 @@ export function webGLStart() {
 
     //triangle = new Triangle(v1,v2,v3);
     //square = new Square(v1, v2, v3);
-    cube = new Cube(1.5);
+    cube = new Cube("Cube", 1.5);
 
     drawScene();
 }

@@ -1,8 +1,10 @@
 import Rectangle from "./rectangle.js";
+import SGNode from "./scenegraph/sgnode";
 
-export default class Cuboid {
+export default class Cuboid extends SGNode {
 
-    constructor(ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8) {
+    constructor(name, ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8) {
+        super(name);
         this.rec1 = new Rectangle(ver1, ver2, ver3, ver4);
         this.rec2 = new Rectangle(ver5, ver6, ver2, ver1);
         this.rec3 = new Rectangle(ver7, ver8, ver6, ver5);
