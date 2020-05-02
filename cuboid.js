@@ -1,5 +1,5 @@
 import Rectangle from "./rectangle.js";
-import SGNode from "./scenegraph/sgnode";
+import SGNode from "./scenegraph/sgnode.js";
 
 export default class Cuboid extends SGNode {
 

@@ -1,6 +1,6 @@
-import SGNode from "./sgnode";
+import SGNode from "./sgnode.js";
 
-export class Component extends SGNode {
+export default class Component extends SGNode {
 
     constructor(name) {
         super();
