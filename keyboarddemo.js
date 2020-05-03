@@ -1,5 +1,6 @@
 import {modelViewMatrix} from "./webglstart.js";
-import {mat4} from "./gl-matrix";
+import {mat4, vec3} from "./gl-matrix";
+import {glMatrix} from "./gl-matrix/index.js";
 
 class KeyboardDemo {
 

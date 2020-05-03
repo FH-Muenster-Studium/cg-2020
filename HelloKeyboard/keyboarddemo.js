@@ -1,7 +1,9 @@
-class KeyboardDemo{
+class KeyboardDemo {
 
-    registerEvents(){
-        document.addEventListener('keydown', function(event) { Key.keyControl(event); });
+    registerEvents() {
+        document.addEventListener('keydown', function (event) {
+            Key.keyControl(event);
+        });
 
         var Key = {
             keyboardDemo: this,
@@ -12,7 +14,7 @@ class KeyboardDemo{
 
     }
 
-    doSomething(code){
-    	console.log('KeyCode: ' + code);
+    doSomething(code) {
+        console.log('KeyCode: ' + code);
     }
 }
