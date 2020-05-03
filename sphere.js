@@ -4,26 +4,25 @@ import SGNode from "./scenegraph/sgnode.js";
 export default class Sphere extends SGNode {
 
     constructor(radius, color) {
-
         super();
 
         this.height = 2 * radius;
 
         this.vertexPositionData = [];
 
-        var latitudeBands = 100;
-        var longitudeBands = 100;
+        let latitudeBands = 100;
+        let longitudeBands = 100;
 
         // Erzeuge Punkte, af den Breiten- (latitudeBands) und Längengraden (longitudeBands) einer Kugel
-        for (var i = 0; i <= latitudeBands; i++) {
-            var theta = i * Math.PI / latitudeBands;
-            var sinTheta = Math.sin(theta);
-            var cosTheta = Math.cos(theta);
-            for (var j = 0; j <= longitudeBands; j++) {
-                var phi = j * 2 * Math.PI / longitudeBands;
-                var x = sinTheta * Math.sin(phi);
-                var y = cosTheta;
-                var z = sinTheta * Math.cos(phi);
+        for (let i = 0; i <= latitudeBands; i++) {
+            let theta = i * Math.PI / latitudeBands;
+            let sinTheta = Math.sin(theta);
+            let cosTheta = Math.cos(theta);
+            for (let j = 0; j <= longitudeBands; j++) {
+                let phi = j * 2 * Math.PI / longitudeBands;
+                let x = sinTheta * Math.sin(phi);
+                let y = cosTheta;
+                let z = sinTheta * Math.cos(phi);
                 this.vertexPositionData.push(radius * x);
                 this.vertexPositionData.push(radius * y);
                 this.vertexPositionData.push(radius * z);
@@ -32,12 +31,12 @@ export default class Sphere extends SGNode {
 
         // Erzeuge Reihenfolge, in der die Punkte gezeichnet werden sollen
         this.indexData = [];
-        for (var i = 0; i < latitudeBands; i++) {
-            for (var j = 0; j < longitudeBands; j++) {
-                var idx0 = (i * (longitudeBands + 1)) + j;
-                var idx1 = idx0 + longitudeBands + 1;
-                var idx2 = idx0 + 1;
-                var idx3 = idx1 + 1;;
+        for (let i = 0; i < latitudeBands; i++) {
+            for (let j = 0; j < longitudeBands; j++) {
+                let idx0 = (i * (longitudeBands + 1)) + j;
+                let idx1 = idx0 + longitudeBands + 1;
+                let idx2 = idx0 + 1;
+                let idx3 = idx1 + 1;
                 this.indexData.push(idx0);
                 this.indexData.push(idx1);
                 this.indexData.push(idx2);
@@ -79,10 +78,6 @@ export default class Sphere extends SGNode {
         //  ... * - * - * ...
 
         this.initBuffers();
-    }
-
-    getHeight() {
-        return this.height;
     }
 
     initBuffers() {
