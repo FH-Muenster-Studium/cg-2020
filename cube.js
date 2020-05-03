@@ -1,5 +1,5 @@
 import Cuboid from "./cuboid.js";
-import {vec3} from "./gl-matrix";
+import {vec3} from "./gl-matrix/index.js";
 
 export default class Cube extends Cuboid {
 

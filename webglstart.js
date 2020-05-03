@@ -1,5 +1,5 @@
 import Cube from "./cube.js";
-import {vec3, mat4} from "./gl-matrix";
+import {vec3, mat4} from "./gl-matrix/index.js";
 import Scene from "./scene.js";
 
 // Globale Variablen:

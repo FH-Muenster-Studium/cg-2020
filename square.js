@@ -1,5 +1,5 @@
 import Triangle from "./triangle.js";
-import {vec3} from "./gl-matrix";
+import {vec3} from "./gl-matrix/index.js";
 
 export default class Square {
     constructor(v1, v2, v3) {
