@@ -1,8 +1,10 @@
 import Triangle from "./triangle.js";
 import {vec3} from "./gl-matrix/index.js";
+import SGNode from "./scenegraph/sgnode.js";
 
-export default class Square {
+export default class Square extends SGNode {
     constructor(v1, v2, v3) {
+        super("Square");
         let v4 = vec3.create();
         let multiply = vec3.create();
         vec3.set(multiply, -1.0, -1.0, -1.0);

@@ -1,8 +1,10 @@
 import {gl, shaderProgram} from "./webglstart.js";
+import SGNode from "./scenegraph/sgnode.js";
 
-export default class Triangle {
+export default class Triangle extends SGNode {
 
     constructor(v1, v2, v3) {
+        super("Triangle");
         this.vertices = [
             v1[0], v1[1], v1[2],
             v2[0], v2[1], v2[2],

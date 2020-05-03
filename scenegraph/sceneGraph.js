@@ -15,7 +15,6 @@ export default class SceneGraph {
         mat4.multiply(this.modelViewMatrix, this.modelViewMatrix, node.modelViewMatrix);
         this.matrixStack.push(this.modelViewMatrix);
 
-
         this.logString += "{"
 
         this.logString += node.draw();
@@ -24,10 +23,9 @@ export default class SceneGraph {
 
         const children = node.getChildren();
         for (let c = 0; c < children.length; c++) {
-
             this.drawTraversal(children[c]);
-
         }
+
         this.matrixStack.pop();
         this.logString += "]";
 
