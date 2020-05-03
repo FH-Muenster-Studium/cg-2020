@@ -4,7 +4,8 @@ import SGNode from "./scenegraph/sgnode.js";
 export default class Cuboid extends SGNode {
 
     constructor(name, ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8) {
-        super(name);
+        super();
+        this.name = name;
         this.rec1 = new Rectangle(ver1, ver2, ver3, ver4);
         this.rec2 = new Rectangle(ver5, ver6, ver2, ver1);
         this.rec3 = new Rectangle(ver7, ver8, ver6, ver5);
@@ -20,5 +21,6 @@ export default class Cuboid extends SGNode {
         this.rec4.draw();
         this.rec5.draw();
         this.rec6.draw();
+        return this.name;
     }
 }

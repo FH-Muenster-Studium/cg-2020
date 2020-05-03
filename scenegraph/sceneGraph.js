@@ -17,7 +17,7 @@ export default class SceneGraph {
 
         this.logString += "{"
 
-        this.logString += node.draw();
+        this.logString += node.name;
 
         this.logString += "[";
 
@@ -32,7 +32,7 @@ export default class SceneGraph {
         this.logString += "}";
 
         /* draw the node after leaving it */
-        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.modelViewMatrix);
+        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, this.modelViewMatrix);
         node.draw();
 
         /* set the local matrix to the matrix of the parent */

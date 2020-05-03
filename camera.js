@@ -1,4 +1,4 @@
-import {modelViewMatrix} from "./webglstart.js";
+import {projectionMatrix} from "./webglstart.js";
 import Component from "./scenegraph/component.js";
 import {glMatrix} from "./gl-matrix/index.js";
 import * as vec3 from "./gl-matrix/vec3.js";
@@ -32,17 +32,18 @@ export default class Camera extends Component {
         this.near = 0.1;
         this.far = 100;
 
-        mat4.identity(modelViewMatrix);
-        mat4.fromTranslation(modelViewMatrix, [0, 0, this.distance]);
+        mat4.identity(projectionMatrix);
+        mat4.fromTranslation(projectionMatrix, [0, 0, this.distance]);
         //mat4.identity(projectionMatrix);
-        mat4.mul(modelViewMatrix, modelViewMatrix, this.transformation);
+        mat4.mul(projectionMatrix, projectionMatrix, this.transformation);
     }
 
     draw() {
-        mat4.perspective(modelViewMatrix, glMatrix.toRadian(this.fieldOfView), this.aspectRatio, this.near, this.far);
+        mat4.perspective(projectionMatrix, glMatrix.toRadian(this.fieldOfView), this.aspectRatio, this.near, this.far);
+        return super.draw();
     }
 
     moveProjection() {
-        mat4.perspective(modelViewMatrix, glMatrix.toRadian(this.fieldOfView), this.aspectRatio, this.near, this.far);
+        mat4.perspective(projectionMatrix, glMatrix.toRadian(this.fieldOfView), this.aspectRatio, this.near, this.far);
     }
 }

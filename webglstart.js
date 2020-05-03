@@ -4,10 +4,10 @@ import Scene from "./scene.js";
 
 // Globale Variablen:
 var gl;
-var cube;
 var scene;
 var shaderProgram;
 var modelViewMatrix = mat4.create();
+var viewMatrix = mat4.create();
 var projectionMatrix = mat4.create();
 
 // Globale Funktionen:
@@ -33,9 +33,6 @@ export function webGLStart() {
     var v3 = vec3.create();
     vec3.set(v3, 0.75, -0.75, 0.0);
 
-    //triangle = new Triangle(v1,v2,v3);
-    //square = new Square(v1, v2, v3);
-    cube = new Cube("Cube", 1.5);
     scene = new Scene();
 
     drawScene();
@@ -72,6 +69,7 @@ function initShaders() {
     gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 
     shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uProjectionMatrix");
+    shaderProgram.vMatrixUniform = gl.getUniformLocation(shaderProgram, "uViewMatrix");
     shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "uModelViewMatrix");
 }
 
@@ -119,13 +117,13 @@ function drawScene() {
     //mat4.identity(modelViewMatrix);
 
     gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projectionMatrix);
+    gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
     gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelViewMatrix);
 
-    //cube.draw();
     scene.draw();
 
     // Ermöglicht Echtzeit Rendering und Animation
     window.requestAnimationFrame(drawScene);
 }
 
-export {gl, shaderProgram, modelViewMatrix};
+export {gl, shaderProgram, modelViewMatrix, viewMatrix, projectionMatrix};
