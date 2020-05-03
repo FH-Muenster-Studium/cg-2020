@@ -15,7 +15,7 @@
     <script id="shader-vs" type="x-shader/x-vertex">
         attribute vec3 aVertexPosition;
         attribute vec4 aVertexColor;
-        uniform mat4 uModelViewMatrix;
+        uniform mat4 uModelMatrix;
         uniform mat4 uViewMatrix;
         uniform mat4 uProjectionMatrix;
 
@@ -23,7 +23,7 @@
         varying vec4 vColor;
 
         void main(void) {
-            gl_Position = uProjectionMatrix * uModelViewMatrix * uViewMatrix * vec4(aVertexPosition, 1);
+            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 1.0);
             vColor = aVertexColor;
         }
        </script>

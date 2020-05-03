@@ -32,7 +32,7 @@ export default class SceneGraph {
         this.logString += "}";
 
         /* draw the node after leaving it */
-        gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, this.modelViewMatrix);
+        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.modelViewMatrix);
         node.draw();
 
         /* set the local matrix to the matrix of the parent */
@@ -43,14 +43,14 @@ export default class SceneGraph {
 
         this.logString = "";
 
-        console.log("Zeichne Szenegraph: ");
+        //console.log("Zeichne Szenegraph: ");
 
-        console.log("Bspl: {Knoten,[{Kind,[]}]}");
+        //console.log("Bspl: {Knoten,[{Kind,[]}]}");
 
         mat4.identity(this.modelViewMatrix);
         this.drawTraversal(this.root);
 
-        console.log(this.logString);
-        console.log("Zeichnen des Szenegraphen abgeschlossen.");
+        //console.log(this.logString);
+        //console.log("Zeichnen des Szenegraphen abgeschlossen.");
     }
 }

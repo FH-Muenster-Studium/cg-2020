@@ -6,7 +6,7 @@ import Scene from "./scene.js";
 var gl;
 var scene;
 var shaderProgram;
-var modelViewMatrix = mat4.create();
+var modelMatrix = mat4.create();
 var viewMatrix = mat4.create();
 var projectionMatrix = mat4.create();
 
@@ -72,7 +72,7 @@ function initShaders() {
 
     shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uProjectionMatrix");
     shaderProgram.vMatrixUniform = gl.getUniformLocation(shaderProgram, "uViewMatrix");
-    shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "uModelViewMatrix");
+    shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "uModelMatrix");
 }
 
 function getShaderFromHTML(id) {
@@ -115,12 +115,12 @@ function drawScene() {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    mat4.identity(projectionMatrix);
+    //mat4.identity(projectionMatrix);
     //mat4.identity(modelViewMatrix);
 
     gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projectionMatrix);
     gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
-    gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelViewMatrix);
+    gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelMatrix);
 
     scene.draw();
 
@@ -128,4 +128,4 @@ function drawScene() {
     window.requestAnimationFrame(drawScene);
 }
 
-export {gl, shaderProgram, modelViewMatrix, viewMatrix, projectionMatrix};
+export {gl, shaderProgram, modelMatrix, viewMatrix, projectionMatrix, scene};

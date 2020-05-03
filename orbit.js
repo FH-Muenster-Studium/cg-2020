@@ -1,4 +1,5 @@
 import Component from "./scenegraph/component.js";
+import Cube from "./cube.js";
 
 export default class Orbit extends Component {
 
