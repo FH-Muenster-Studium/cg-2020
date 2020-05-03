@@ -8,6 +8,8 @@ export default class SceneGraph {
         this.root = rootNode;
         this.matrixStack = new MatrixStack();
         this.modelMatrix = mat4.create();
+        this.logString = "";
+        this.lastLogString = null;
     }
 
     drawTraversal(node) {
@@ -15,6 +17,12 @@ export default class SceneGraph {
 
         mat4.multiply(this.modelMatrix, this.modelMatrix, node.modelMatrix);
         this.matrixStack.push(this.modelMatrix);
+
+        this.logString += "{"
+
+        this.logString += node.name;
+
+        this.logString += "[";
 
         /* draw the node after leaving it */
         gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.modelMatrix);
@@ -26,12 +34,21 @@ export default class SceneGraph {
         }
         this.matrixStack.pop();
 
+        this.logString += "]";
+
+        this.logString += "}";
+
         /* set the local matrix to the matrix of the parent */
         this.modelMatrix = this.matrixStack.top();
     }
 
     draw() {
+        this.logString = "";
         mat4.identity(this.modelMatrix);
         this.drawTraversal(this.root);
+        if (this.lastLogString !== this.logString) {
+            console.log(this.logString);
+            this.lastLogString = this.logString;
+        }
     }
 }

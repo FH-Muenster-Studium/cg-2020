@@ -3,8 +3,9 @@ import SGNode from "./scenegraph/sgnode.js";
 
 export default class Sphere extends SGNode {
 
-    constructor(radius, color) {
+    constructor(name, radius, color) {
         super();
+        this.name = name;
 
         this.height = 2 * radius;
 
@@ -110,5 +111,6 @@ export default class Sphere extends SGNode {
 
         //Zeichnet Elemente im Array-Buffer gemäß Element-Indices im Index-Buffer
         gl.drawElements(gl.TRIANGLE_STRIP, this.indexData.length, gl.UNSIGNED_SHORT, 0);
+        return this.name;
     }
 }
