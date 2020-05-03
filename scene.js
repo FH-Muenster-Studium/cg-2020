@@ -4,6 +4,7 @@ import Component from "./scenegraph/component.js";
 import SceneGraph from "./scenegraph/sceneGraph.js";
 import Camera from "./camera.js";
 import * as vec3 from "./gl-matrix/vec3.js";
+import KeyboardControl from "./keyboard-control.js";
 
 export default class Scene {
 
@@ -27,8 +28,10 @@ export default class Scene {
 
         this.position = vec3.fromValues(0.0, 0.0, 0.0);
         this.camera = new Camera("Camera", this.position, -5);
+        this.keyboardControl = new KeyboardControl();
 
         this.scene.addChild(this.camera);
+        this.scene.addChild(this.keyboardControl);
         this.scene.addChild(this.sunOrbit);
 
         this.scenegraph = new SceneGraph(this.scene);

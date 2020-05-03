@@ -1,77 +1,65 @@
 import {viewMatrix, scene} from "./webglstart.js";
 import {mat4} from "./gl-matrix/index.js";
+import Component from "./scenegraph/component.js";
 
-class KeyboardDemo {
+export default class KeyboardControl extends Component {
 
     constructor() {
+        super("KeyboardControl");
         this.rotateX = 0;
         this.rotateY = 0;
         this.rotateZ = 0;
-    }
 
-    registerEvents() {
-        document.addEventListener('keydown', function (event) {
-            Key.keyControl(event);
+        document.addEventListener('keydown', (event) =>  {
+            this.onKeyPress(event.key);
         });
-
-        var Key = {
-            keyboardDemo: this,
-            keyControl: function (event) {
-                this.keyboardDemo.doSomething(event.keyCode);
-            }
-        }
-
     }
 
-    doSomething(code) {
+    onKeyPress(code) {
         const r = 0.1;
         switch (code) {
-            case 37:
+            case "ArrowLeft":
                 // left arrow
                 this.rotateY = r;
                 mat4.rotateY(viewMatrix, viewMatrix, this.rotateY);
                 break;
-            case 39:
+            case "ArrowRight":
                 // right arrow
                 this.rotateY = -r;
                 mat4.rotateY(viewMatrix, viewMatrix, this.rotateY);
                 break;
-            case 38:
+            case "ArrowUp":
                 // up arrow
                 this.rotateX = r;
                 mat4.rotateX(viewMatrix, viewMatrix, this.rotateX);
                 break;
-            case 40:
+            case "ArrowDown":
                 // down arrow
                 this.rotateX = -r;
                 mat4.rotateX(viewMatrix, viewMatrix, this.rotateX);
                 break;
-            case 69:
+            case "e":
                 // e
                 this.rotateZ = r;
                 mat4.rotateZ(viewMatrix, viewMatrix, this.rotateZ);
                 break;    
-            case 81:
+            case "q":
                 // q
                 this.rotateZ = -r;
                 mat4.rotateZ(viewMatrix, viewMatrix, this.rotateZ);
                 break;
-            case 109:
+            case "+":
                 if(scene.camera.fieldOfView > 0 && scene.camera.fieldOfView <= 180) {
                     scene.camera.fieldOfView -= 1;
                     scene.camera.moveProjection();
                 }
                 break;
-            case 107:
+            case "-":
                 if(scene.camera.fieldOfView >= 0 && scene.camera.fieldOfView < 180) {
                     scene.camera.fieldOfView += 1;
                     scene.camera.moveProjection();
                 }
                 break;
-
-
         }
     }
 }
-
-export default new KeyboardDemo();
