@@ -15,7 +15,7 @@ export default class Orb extends Component {
         }
         this.scale = this.diameter / 20000;
 
-        this.addChild(new Cube(this.name + "-Cube", this.scale/*, this.color*/));
+        this.addChild(new Cube(this.name + "-Cube", this.scale, this.color));
 
         this.setRotation(this.tilt, [0, 0, -1]);
         this.setTranslation([-this.distance, 0, this.z]);

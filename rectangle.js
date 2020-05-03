@@ -2,9 +2,9 @@ import Triangle from "./triangle.js";
 
 export default class Rectangle {
 
-    constructor(v1, v2, v3, v4) {
-        this.triangle1 = new Triangle(v1, v2, v3);
-        this.triangle2 = new Triangle(v1, v3, v4);
+    constructor(v1, v2, v3, v4, color) {
+        this.triangle1 = new Triangle(v1, v2, v3, color);
+        this.triangle2 = new Triangle(v1, v3, v4, color);
     }
 
     draw() {
