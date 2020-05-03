@@ -16,13 +16,11 @@ export default class Scene {
         this.sunOrbit.addChild(this.earthOrbit);
         this.sunOrbit.addChild(this.marsOrbit);
         this.earth = new Orb("Erde", 12800, 23.45, 2.5, this.getGreenColorMatrix());
-        this.moonOrbitAxis = new Orbit("Mond-Orbit-Achse", 0, 0.2, 2.5);
-        this.earthOrbit.addChild(this.moonOrbitAxis);
-        this.earthOrbit.addChild(this.earth);
         this.moonOrbit = new Orbit("Mond-Orbit", 0.384, 5.15, 0, this.getGreyColorMatrix());
-        this.moonOrbitAxis.addChild(this.moonOrbit);
         this.moon = new Orb("Mond", 3476, 1.54, 1, this.getGreyColorMatrix());
         this.moonOrbit.addChild(this.moon);
+        this.earth.addChild(this.moonOrbit);
+        this.earthOrbit.addChild(this.earth);
         this.mars = new Orb("Mars", 6800, 25.19, 4.3, this.getRedColorMatrix());
         this.marsOrbit.addChild(this.mars);
         this.scene = new Component("Scene");
@@ -41,7 +39,7 @@ export default class Scene {
         //this.rotateScene();
     }
 
-    rotateScene(){
+    rotateScene() {
         /* Scale the rotations, because they hurt my eyes (bigger = slower, smaller = faster) */
         this.orbitRotationScale = 1;
         this.planetRotationScale = 50;
@@ -56,15 +54,15 @@ export default class Scene {
         this.rotateOrbit(this.marsOrbit, 687);
     }
 
-    rotatePlanet(node, degree){
-        node.setRotation(360/(degree*this.planetRotationScale), [0, 1, 0]);
+    rotatePlanet(node, degree) {
+        node.setRotation(360 / (degree * this.planetRotationScale), [0, 1, 0]);
     }
 
     rotateOrbit(node, degree) {
         node.setRotation(-360 / (degree * this.orbitRotationScale), [0, 1, 0]);
     }
 
-    getYellowColorMatrix(){
+    getYellowColorMatrix() {
         return [
             1.0, 1.0, 0.2, 1.0,
             1.0, 1.0, 0.4, 1.0,
@@ -72,7 +70,7 @@ export default class Scene {
         ];
     }
 
-    getRedColorMatrix(){
+    getRedColorMatrix() {
         return [
             0.8, 0.1, 0.1, 1.0,
             0.8, 0.1, 0.1, 1.0,
@@ -80,7 +78,7 @@ export default class Scene {
         ];
     }
 
-    getGreenColorMatrix(){
+    getGreenColorMatrix() {
         return [
             0.1, 1.0, 0.1, 1.0,
             0.1, 1.0, 0.1, 1.0,
@@ -88,14 +86,15 @@ export default class Scene {
         ];
     }
 
-    getGreyColorMatrix(){
+    getGreyColorMatrix() {
         return [
             0.8, 0.8, 0.8, 1.0,
             0.8, 0.8, 0.8, 1.0,
             0.8, 0.8, 0.8, 1.0
         ];
     }
-    getBlackColorMatrix(){
+
+    getBlackColorMatrix() {
         return [
             0.0, 0.0, 0.0, 1.0,
             0.0, 0.0, 0.0, 1.0,

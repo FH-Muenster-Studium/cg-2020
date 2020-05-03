@@ -21,5 +21,4 @@ export default class MatrixStack {
             return mat4.create();
         }
     }
-
 }

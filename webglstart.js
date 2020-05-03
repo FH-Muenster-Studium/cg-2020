@@ -1,4 +1,3 @@
-import Cube from "./cube.js";
 import {vec3, mat4} from "./gl-matrix/index.js";
 import Scene from "./scene.js";
 
@@ -114,9 +113,6 @@ function drawScene() {
     //console.log("draw:" + modelViewMatrix);
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-    //mat4.identity(projectionMatrix);
-    //mat4.identity(modelViewMatrix);
 
     gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projectionMatrix);
     gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
