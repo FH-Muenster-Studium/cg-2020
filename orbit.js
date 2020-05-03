@@ -2,12 +2,11 @@ import Component from "./scenegraph/component.js";
 
 export default class Orbit extends Component {
 
-    constructor(name, radius, tilt, distance, color) {
+    constructor(name, radius, tilt, distance) {
         super(name);
         this.radius = radius;
         this.tilt = tilt;
         this.distance = distance;
-        this.color = color;
         if(this.distance == null){
             this.distance = 0;
         }

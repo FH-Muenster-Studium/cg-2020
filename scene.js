@@ -8,15 +8,15 @@ import * as vec3 from "./gl-matrix/vec3.js";
 export default class Scene {
 
     constructor() {
-        this.sunOrbit = new Orbit("Sonnen-Orbit", 0, 0, 0, this.getYellowColorMatrix());
+        this.sunOrbit = new Orbit("Sonnen-Orbit", 0, 0, 0);
         this.sun = new Orb("Sonne", 25000, 7.25, 0, this.getYellowColorMatrix());
-        this.earthOrbit = new Orbit("Erd-Orbit", 150, 0, 0, this.getGreenColorMatrix());
-        this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0, this.getRedColorMatrix());
+        this.earthOrbit = new Orbit("Erd-Orbit", 150, 0, 0);
+        this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
         this.sunOrbit.addChild(this.sun);
         this.sunOrbit.addChild(this.earthOrbit);
         this.sunOrbit.addChild(this.marsOrbit);
         this.earth = new Orb("Erde", 12800, 23.45, 2.5, this.getGreenColorMatrix());
-        this.moonOrbit = new Orbit("Mond-Orbit", 0.384, 5.15, 0, this.getGreyColorMatrix());
+        this.moonOrbit = new Orbit("Mond-Orbit", 0.384, 5.15, 0);
         this.moon = new Orb("Mond", 3476, 1.54, 1, this.getGreyColorMatrix());
         this.moonOrbit.addChild(this.moon);
         this.earth.addChild(this.moonOrbit);
