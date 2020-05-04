@@ -15,17 +15,14 @@ export default class Camera extends Component {
             this.upAxis = vec3.fromValues(0, 1.0, 0);
         }
 
-        // Set the center as the point the projection is looking at
         this.center = vec3.create();
         this.center[0] = this.position[0];
         this.center[1] = this.position[0];
         this.center[2] = this.position[0] + this.distance;
 
-        // sets the transformation of the projection
         this.transformation = mat4.create();
         mat4.lookAt(this.transformation, this.position, this.center, this.upAxis);
 
-        // Set the parameter for setting/changing the projectionMatrix
         this.fieldOfView = 60;
         this.aspectRatio = gl.viewportWidth / gl.viewportHeight;
         this.near = 0.1;

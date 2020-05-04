@@ -9,16 +9,16 @@ import KeyboardControl from "./keyboard-control.js";
 export default class Scene {
 
     constructor() {
-        this.sunOrbit = new Orbit("Sonnen-Orbit", 0, 0, 0);
-        this.sun = new Orb("Sonne", 25000, 7.25, 0, this.getYellowColorMatrix());
-        this.earthOrbit = new Orbit("Erd-Orbit", 150, 0, 0);
+        this.sunOrbit = new Orbit("Sun-Orbit", 0, 0, 0);
+        this.sun = new Orb("Sun", 25000, 7.25, 0, this.getYellowColorMatrix());
+        this.earthOrbit = new Orbit("Earth-Orbit", 150, 0, 0);
         this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
         this.sunOrbit.addChild(this.sun);
         this.sunOrbit.addChild(this.earthOrbit);
         this.sunOrbit.addChild(this.marsOrbit);
-        this.earth = new Orb("Erde", 12800, 23.45, 2.5, this.getGreenColorMatrix());
-        this.moonOrbit = new Orbit("Mond-Orbit", 0.384, 5.15, 0);
-        this.moon = new Orb("Mond", 3476, 1.54, 1, this.getGreyColorMatrix());
+        this.earth = new Orb("Earth", 12800, 23.45, 2.5, this.getGreenColorMatrix());
+        this.moonOrbit = new Orbit("Moon-Orbit", 0.384, 5.15, 0);
+        this.moon = new Orb("Moon", 3476, 1.54, 1, this.getGreyColorMatrix());
         this.moonOrbit.addChild(this.moon);
         this.earth.addChild(this.moonOrbit);
         this.earthOrbit.addChild(this.earth);
@@ -39,25 +39,22 @@ export default class Scene {
 
     draw() {
         this.scenegraph.draw();
-        //this.rotateScene();
     }
 
     rotateScene() {
-        /* Scale the rotations, because they hurt my eyes (bigger = slower, smaller = faster) */
         this.orbitRotationScale = 1;
         this.planetRotationScale = 50;
 
-        /* Rotate the planets */
-        this.rotatePlanet(this.sun, 25.38);
-        this.rotatePlanet(this.earth, 1.01);
-        this.rotatePlanet(this.moon, 27.32);
-        this.rotatePlanet(this.mars, 1.03);
+        this.rotateOrb(this.sun, 25.38);
+        this.rotateOrb(this.earth, 1.01);
+        this.rotateOrb(this.moon, 27.32);
+        this.rotateOrb(this.mars, 1.03);
         this.rotateOrbit(this.earthOrbit, 365);
         this.rotateOrbit(this.moonOrbit, 27.32);
         this.rotateOrbit(this.marsOrbit, 687);
     }
 
-    rotatePlanet(node, degree) {
+    rotateOrb(node, degree) {
         node.setRotation(360 / (degree * this.planetRotationScale), [0, 1, 0]);
     }
 
@@ -94,14 +91,6 @@ export default class Scene {
             0.8, 0.8, 0.8, 1.0,
             0.8, 0.8, 0.8, 1.0,
             0.8, 0.8, 0.8, 1.0
-        ];
-    }
-
-    getBlackColorMatrix() {
-        return [
-            0.0, 0.0, 0.0, 1.0,
-            0.0, 0.0, 0.0, 1.0,
-            0.0, 0.0, 0.0, 1.0,
         ];
     }
 }

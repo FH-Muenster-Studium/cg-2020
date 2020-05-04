@@ -19,32 +19,26 @@ export default class KeyboardControl extends Component {
         const r = 0.1;
         switch (code) {
             case "ArrowLeft":
-                // left arrow
                 this.rotateY = r;
                 mat4.rotateY(viewMatrix, viewMatrix, this.rotateY);
                 break;
             case "ArrowRight":
-                // right arrow
                 this.rotateY = -r;
                 mat4.rotateY(viewMatrix, viewMatrix, this.rotateY);
                 break;
             case "ArrowUp":
-                // up arrow
                 this.rotateX = r;
                 mat4.rotateX(viewMatrix, viewMatrix, this.rotateX);
                 break;
             case "ArrowDown":
-                // down arrow
                 this.rotateX = -r;
                 mat4.rotateX(viewMatrix, viewMatrix, this.rotateX);
                 break;
             case "e":
-                // e
                 this.rotateZ = r;
                 mat4.rotateZ(viewMatrix, viewMatrix, this.rotateZ);
-                break;    
+                break;
             case "q":
-                // q
                 this.rotateZ = -r;
                 mat4.rotateZ(viewMatrix, viewMatrix, this.rotateZ);
                 break;
