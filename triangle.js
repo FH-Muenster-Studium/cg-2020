@@ -30,9 +30,9 @@ export default class Triangle extends SGNode {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
 
-        this.verticesColorBuffer = gl.createBuffer();
+        /*this.verticesColorBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.verticesColorBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.colors), gl.STATIC_DRAW);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.colors), gl.STATIC_DRAW);*/
     }
 
     draw() {
@@ -41,8 +41,8 @@ export default class Triangle extends SGNode {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
         gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, 3, gl.FLOAT, false, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.verticesColorBuffer);
-        gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, 4, gl.FLOAT, false, 0, 0);
+        /*gl.bindBuffer(gl.ARRAY_BUFFER, this.verticesColorBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, 4, gl.FLOAT, false, 0, 0);*/
 
 
         gl.drawArrays(gl.TRIANGLES, 0, 3);

@@ -14,7 +14,6 @@ export default class Sphere extends SGNode {
         let latitudeBands = 100;
         let longitudeBands = 100;
 
-        // Erzeuge Punkte, af den Breiten- (latitudeBands) und Längengraden (longitudeBands) einer Kugel
         for (let i = 0; i <= latitudeBands; i++) {
             let theta = i * Math.PI / latitudeBands;
             let sinTheta = Math.sin(theta);
@@ -30,7 +29,6 @@ export default class Sphere extends SGNode {
             }
         }
 
-        // Erzeuge Reihenfolge, in der die Punkte gezeichnet werden sollen
         this.indexData = [];
         for (let i = 0; i < latitudeBands; i++) {
             for (let j = 0; j < longitudeBands; j++) {
@@ -56,28 +54,6 @@ export default class Sphere extends SGNode {
             this.colors = color;
         }
 
-
-        // Zeichne Kugel mit TRIANGLE_STRIPs
-        //
-        //  ... * - * - * ...
-        //      |  /|  /|
-        //      | / | / |
-        //  ... * - * - * ...
-        //      .
-        //      .
-        //      0   2   4
-        //  ... * - * - * ...
-        //      |  /|  /|
-        //      | / | / |
-        //  ... * - * - * ...
-        //      1   3   5
-        //      .
-        //      .
-        //  ... * - * - * ...
-        //      |  /|  /|
-        //      | / | / |
-        //  ... * - * - * ...
-
         this.initBuffers();
     }
 
@@ -86,9 +62,9 @@ export default class Sphere extends SGNode {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexPositionData), gl.STATIC_DRAW);
 
-        this.verticesColorBuffer = gl.createBuffer();
+        /*this.verticesColorBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.verticesColorBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.colors), gl.STATIC_DRAW);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.colors), gl.STATIC_DRAW);*/
 
         this.indexBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
@@ -100,8 +76,8 @@ export default class Sphere extends SGNode {
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
         gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.verticesColorBuffer);
-        gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, 4, gl.FLOAT, false, 0, 0);
+        /*gl.bindBuffer(gl.ARRAY_BUFFER, this.verticesColorBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexColorAttribute, 4, gl.FLOAT, false, 0, 0);*/
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     }
@@ -109,7 +85,6 @@ export default class Sphere extends SGNode {
     draw() {
         this.bindBuffers();
 
-        //Zeichnet Elemente im Array-Buffer gemäß Element-Indices im Index-Buffer
         gl.drawElements(gl.TRIANGLE_STRIP, this.indexData.length, gl.UNSIGNED_SHORT, 0);
         return this.name;
     }
