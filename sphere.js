@@ -3,7 +3,7 @@ import SGNode from "./scenegraph/sgnode.js";
 
 export default class Sphere extends SGNode {
 
-    constructor(name, radius, color) {
+    constructor(name, radius) {
         super();
         this.name = name;
 
@@ -43,7 +43,7 @@ export default class Sphere extends SGNode {
             }
         }
 
-        if (color == null) {
+        /*if (color == null) {
             this.colors = [
                 0.0, 1.0, 0.2, 1.0,
                 1.0, 1.0, 0.4, 1.0,
@@ -52,7 +52,7 @@ export default class Sphere extends SGNode {
         }
         else {
             this.colors = color;
-        }
+        }*/
 
         this.initBuffers();
     }

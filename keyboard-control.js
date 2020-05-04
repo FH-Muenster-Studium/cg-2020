@@ -4,8 +4,8 @@ import Component from "./scenegraph/component.js";
 
 export default class KeyboardControl extends Component {
 
-    constructor() {
-        super("KeyboardControl");
+    constructor(name) {
+        super(name);
         this.rotateX = 0;
         this.rotateY = 0;
         this.rotateZ = 0;
