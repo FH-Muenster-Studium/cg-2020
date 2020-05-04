@@ -43,7 +43,7 @@ export default class Scene {
 
     rotateScene() {
         this.orbitRotationScale = 1;
-        this.planetRotationScale = 50;
+        this.orbRotationScale = 50;
 
         this.rotateOrb(this.sun, 25.38);
         this.rotateOrb(this.earth, 1.01);
@@ -55,7 +55,7 @@ export default class Scene {
     }
 
     rotateOrb(node, degree) {
-        node.setRotation(360 / (degree * this.planetRotationScale), [0, 1, 0]);
+        node.setRotation(360 / (degree * this.orbRotationScale), [0, 1, 0]);
     }
 
     rotateOrbit(node, degree) {
