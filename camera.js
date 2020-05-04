@@ -1,8 +1,6 @@
 import {projectionMatrix, modelMatrix, viewMatrix, gl} from "./webglstart.js";
 import Component from "./scenegraph/component.js";
-import {glMatrix} from "./gl-matrix/index.js";
-import * as vec3 from "./gl-matrix/vec3.js";
-import * as mat4 from "./gl-matrix/mat4.js";
+import {glMatrix, vec3, mat4} from "./gl-matrix/index.js";
 
 export default class Camera extends Component {
     constructor(name, position, distance, upAxis) {
