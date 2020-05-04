@@ -1,5 +1,6 @@
 import {viewMatrix, scene} from "./webglstart.js";
 import {mat4} from "./gl-matrix/index.js";
+import {vec3} from "./gl-matrix/index.js";
 import Component from "./scenegraph/component.js";
 
 export default class KeyboardControl extends Component {
