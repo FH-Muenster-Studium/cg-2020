@@ -5,10 +5,9 @@ import OrbitalPeriod from "./orbital-period.js";
 
 export default class Orb extends Component {
 
-    constructor(name, diameter, tilt, distance, rotationPeriod, color) {
+    constructor(name, diameter, distance, rotationPeriod, color) {
         super(name);
         this.diameter = diameter;
-        this.tilt = tilt;
         this.distance = distance;
         this.color = color;
         this.z = 0;
@@ -17,7 +16,6 @@ export default class Orb extends Component {
         }
         this.scale = this.diameter / 20000;
 
-        this.setRotation(this.tilt, [0, 0, -1]);
         this.setTranslation([-this.distance, 0, this.z]);
 
         const rotationPeriodChild = new OrbitalPeriod(this.name + "-Orbital-Period", rotationPeriod, [0, 1, 0]);
