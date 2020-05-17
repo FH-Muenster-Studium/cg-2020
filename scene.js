@@ -46,6 +46,8 @@ export default class Scene {
     }
 
     draw(now) {
-        this.scenegraph.draw(now);
+        const deltaTime = now - this.then;
+        this.then = now;
+        this.scenegraph.draw(deltaTime);
     }
 }
