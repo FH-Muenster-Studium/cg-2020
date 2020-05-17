@@ -51,7 +51,6 @@ export default class SGNode {
     }
 
     draw(now) {
-
     }
 
     printName() {

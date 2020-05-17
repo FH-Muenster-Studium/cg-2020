@@ -8,6 +8,7 @@ export default class Component extends SGNode {
     }
 
     draw(now) {
+        super.draw(now);
         return this.name + ",";
     }
 }

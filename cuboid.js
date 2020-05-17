@@ -14,13 +14,14 @@ export default class Cuboid extends SGNode {
         this.rec6 = new Rectangle(ver2, ver6, ver8, ver3, color);
     }
 
-    draw() {
+    draw(now) {
         this.rec1.draw();
         this.rec2.draw();
         this.rec3.draw();
         this.rec4.draw();
         this.rec5.draw();
         this.rec6.draw();
+        super.draw(now);
         return this.name;
     }
 }

@@ -24,5 +24,15 @@ export default class Orb extends Component {
 
         this.setRotation(this.tilt, [0, 0, -1]);
         this.setTranslation([-this.distance, 0, this.z]);
+        this.oneRotationInMilliseconds = 27.32 * 24.0 * 60.0 * 60.0 * 1000.0;
+    }
+
+    draw(now) {
+        //console.log(now);
+        //360° = 27,32 * 24 * 60 * 60 * 1000
+        const currentMovement = this.oneRotationInMilliseconds / now;
+        //console.log(currentMovement);
+        this.setRotation(this.tilt, [0, 0, -1]);
+        return super.draw(now);
     }
 }

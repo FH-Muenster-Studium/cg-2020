@@ -35,7 +35,7 @@ export default class Triangle extends SGNode {
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.colors), gl.STATIC_DRAW);*/
     }
 
-    draw() {
+    draw(now) {
         //bindBuffer() immer vor vertexAttribPointer() ausführen,
         //damit der gebundene Buffer in die zugehörige Shader Variable geladen wird!
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
@@ -46,5 +46,6 @@ export default class Triangle extends SGNode {
 
 
         gl.drawArrays(gl.TRIANGLES, 0, 3);
+        super.draw(now);
     }
 }

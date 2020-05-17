@@ -7,7 +7,7 @@ export default class Rectangle {
         this.triangle2 = new Triangle(v1, v3, v4, color);
     }
 
-    draw() {
+    draw(now) {
         this.triangle1.draw();
         this.triangle2.draw();
     }

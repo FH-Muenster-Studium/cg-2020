@@ -86,6 +86,7 @@ export default class Sphere extends SGNode {
         this.bindBuffers();
 
         gl.drawElements(gl.TRIANGLE_STRIP, this.indexData.length, gl.UNSIGNED_SHORT, 0);
+        super.draw(now);
         return this.name;
     }
 }
