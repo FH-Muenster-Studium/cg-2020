@@ -9,6 +9,7 @@ import KeyboardControl from "./keyboard-control.js";
 export default class Scene {
 
     constructor() {
+        this.then = 0;
         // Sun
         this.sunOrbit = new Orbit("Sun-Orbit", 0, 0, 0);
         this.sun = new Orb("Sun", 25000, 7.25, 0);
@@ -46,6 +47,7 @@ export default class Scene {
     }
 
     draw(now) {
+        if (isNaN(now)) return;
         const deltaTime = now - this.then;
         this.then = now;
         this.scenegraph.draw(deltaTime);
