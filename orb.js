@@ -4,7 +4,7 @@ import Sphere from "./sphere.js";
 
 export default class Orb extends Component {
 
-    constructor(name, diameter, tilt, distance, orbitalPeriod, color) {
+    constructor(name, diameter, tilt, distance, rotationPeriod, color) {
         super(name);
         this.diameter = diameter;
         this.tilt = tilt;
@@ -24,11 +24,11 @@ export default class Orb extends Component {
 
         this.setRotation(this.tilt, [0, 0, -1]);
         this.setTranslation([-this.distance, 0, this.z]);
-        //360° = 27,32 * 24 * 60 * 60 * 1000
-        if (orbitalPeriod === 0) {
+        //360° = orbitalPeriod Tage * 24 * 60 * 60 * 1000
+        if (rotationPeriod === 0) {
             this.oneRotationInMilliseconds = null;
         } else {
-            this.oneRotationInMilliseconds = orbitalPeriod * 24.0 * 60.0 * 60.0 * 1000.0;
+            this.oneRotationInMilliseconds = rotationPeriod * 24.0 * 60.0 * 60.0 * 1000.0;
         }
     }
 
