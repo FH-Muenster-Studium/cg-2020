@@ -35,7 +35,7 @@ export default class Orb extends Component {
     draw(now) {
         if (this.oneRotationInMilliseconds !== null) {
             const currentMovement = now / this.oneRotationInMilliseconds;
-            this.setRotation(currentMovement * 360, [0, 0, -1]);
+            this.setRotation(currentMovement * 360, [0, 1, 0]);
         }
         return super.draw(now);
     }
