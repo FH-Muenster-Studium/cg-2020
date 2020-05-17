@@ -30,7 +30,7 @@ export default class SceneGraph {
 
         let children = node.getChildren();
         for (let c = 0; c < children.length; c++) {
-            this.drawTraversal(children[c]);
+            this.drawTraversal(children[c], now);
         }
         this.matrixStack.pop();
 
