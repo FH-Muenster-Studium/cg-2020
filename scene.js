@@ -45,7 +45,7 @@ export default class Scene {
         this.scenegraph = new SceneGraph(this.scene);
     }
 
-    draw() {
-        this.scenegraph.draw();
+    draw(now) {
+        this.scenegraph.draw(now);
     }
 }

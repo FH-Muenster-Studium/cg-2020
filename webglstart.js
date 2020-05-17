@@ -109,7 +109,7 @@ function getShaderFromHTML(id) {
     return shader;
 }
 
-function drawScene() {
+function drawScene(now) {
     //console.log("draw:" + modelViewMatrix);
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -118,7 +118,7 @@ function drawScene() {
     gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
     gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelMatrix);
 
-    scene.draw();
+    scene.draw(now);
 
     // Ermöglicht Echtzeit Rendering und Animation
     window.requestAnimationFrame(drawScene);

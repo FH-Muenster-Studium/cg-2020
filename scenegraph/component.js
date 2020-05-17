@@ -7,7 +7,7 @@ export default class Component extends SGNode {
         this.name = name;
     }
 
-    draw() {
+    draw(now) {
         return this.name + ",";
     }
 }

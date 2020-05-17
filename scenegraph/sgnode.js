@@ -50,7 +50,7 @@ export default class SGNode {
         return this.modelMatrix;
     }
 
-    draw() {
+    draw(now) {
 
     }
 

@@ -82,7 +82,7 @@ export default class Sphere extends SGNode {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     }
 
-    draw() {
+    draw(now) {
         this.bindBuffers();
 
         gl.drawElements(gl.TRIANGLE_STRIP, this.indexData.length, gl.UNSIGNED_SHORT, 0);
