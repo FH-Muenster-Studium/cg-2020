@@ -57,6 +57,6 @@ export default class Scene {
         if (isNaN(now)) return;
         const deltaTime = now - this.then;
         this.then = now;
-        this.scenegraph.draw(deltaTime * 100000);
+        this.scenegraph.draw(deltaTime * 1000000);
     }
 }
