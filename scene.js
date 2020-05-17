@@ -12,24 +12,24 @@ export default class Scene {
         this.then = 0;
         // Sun
         this.sunOrbit = new Orbit("Sun-Orbit", 0, 0, 0);
-        this.sun = new Orb("Sun", 25000, 7.25, 0);
+        this.sun = new Orb("Sun", 25000, 7.25, 0, 0);
         this.sunOrbit.addChild(this.sun);
 
         // Earth
         this.earthOrbit = new Orbit("Earth-Orbit", 150, 0, 0);
-        this.earth = new Orb("Earth", 12800, 23.45, 2.5);
+        this.earth = new Orb("Earth", 12800, 23.45, 2.5, 365);
         this.earthOrbit.addChild(this.earth);
         this.sunOrbit.addChild(this.earthOrbit);
 
         // Mars
         this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
-        this.mars = new Orb("Mars", 6800, 25.19, 4.3);
+        this.mars = new Orb("Mars", 6800, 25.19, 4.3, 687);
         this.marsOrbit.addChild(this.mars);
         this.sunOrbit.addChild(this.marsOrbit);
 
         // Moon
         this.moonOrbit = new Orbit("Moon-Orbit", 0.384, 5.15, 0);
-        this.moon = new Orb("Moon", 3476, 1.54, 1);
+        this.moon = new Orb("Moon", 3476, 1.54, 1, 27.32);
         this.moonOrbit.addChild(this.moon);
         this.earth.addChild(this.moonOrbit);
 
