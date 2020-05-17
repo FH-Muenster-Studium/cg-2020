@@ -43,7 +43,7 @@ export default class Scene {
         this.scene = new Component("Scene");
 
         this.position = vec3.fromValues(0.0, 0.0, 0.0);
-        this.camera = new Camera("Camera", this.position, -5);
+        this.camera = new Camera("Camera", this.position, -15);
         this.keyboardControl = new KeyboardControl("Keyboard");
 
         this.scene.addChild(this.camera);
