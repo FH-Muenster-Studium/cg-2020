@@ -60,6 +60,12 @@ export default class KeyboardControl extends Component {
                     scene.camera.moveProjection();
                 }
                 break;
+            case "t":
+                scene.timeFactor += 1000;
+                break;
+            case "z":
+                scene.timeFactor -= 1000;
+                break;
         }
     }
 }

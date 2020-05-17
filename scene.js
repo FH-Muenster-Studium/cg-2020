@@ -10,6 +10,7 @@ export default class Scene {
 
     constructor() {
         this.then = 0;
+        this.timeFactor = 1;
         // Sun
         this.sunOrbit = new Orbit("Sun-Orbit", 0, 0, 0, 0);
         this.sun = new Orb("Sun", 25000, 7.25, 0, 25.38);
@@ -50,6 +51,6 @@ export default class Scene {
         if (isNaN(now)) return;
         const deltaTime = now - this.then;
         this.then = now;
-        this.scenegraph.draw(deltaTime * 200000);
+        this.scenegraph.draw(deltaTime * this.timeFactor);
     }
 }
