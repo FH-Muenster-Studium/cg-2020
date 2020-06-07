@@ -51,13 +51,13 @@ export default class KeyboardControl extends Component {
             case "+":
                 if(scene.camera.fieldOfView > 0 && scene.camera.fieldOfView <= 180) {
                     scene.camera.fieldOfView -= 1;
-                    scene.camera.moveProjection();
+                    //scene.camera.moveProjection();
                 }
                 break;
             case "-":
                 if(scene.camera.fieldOfView >= 0 && scene.camera.fieldOfView < 180) {
                     scene.camera.fieldOfView += 1;
-                    scene.camera.moveProjection();
+                    //scene.camera.moveProjection();
                 }
                 break;
         }

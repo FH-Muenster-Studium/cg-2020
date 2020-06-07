@@ -22,16 +22,6 @@ export function webGLStart() {
     console.log(gl.getParameter(gl.VERSION));
     console.log(gl.getParameter(gl.SHADING_LANGUAGE_VERSION));
 
-    // Zusammensetzen eines Dreieck
-    var v1 = vec3.create();
-    vec3.set(v1, -0.75, 0.75, 0.0);
-
-    var v2 = vec3.create();
-    vec3.set(v2, -0.75, -0.75, 0.0);
-
-    var v3 = vec3.create();
-    vec3.set(v3, 0.75, -0.75, 0.0);
-
     scene = new Scene();
 
     drawScene();
