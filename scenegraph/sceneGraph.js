@@ -24,18 +24,19 @@ export default class SceneGraph {
 
         this.logString += "[";
 
-        let nMatrix = mat3.create();
-        let mvMatrix = mat4.create();
+        this.mvMatrix = mat4.create();
+        mat4.mul(this.mvMatrix, viewMatrix, this.modelMatrix);
 
-        mat4.multiply(mvMatrix, viewMatrix, this.modelMatrix);
-        mat3.normalFromMat4(nMatrix, mvMatrix);
-        gl.uniformMatrix3fv(shaderProgram.uNormalMatrixUniform, false, nMatrix);
+        if (node instanceof Light) {
+            node.updatePosition(this.mvMatrix);
+        }
+
+        this.nMatrix = mat3.create();
+        mat3.normalFromMat4(this.nMatrix, this.mvMatrix);
+        gl.uniformMatrix3fv(shaderProgram.uNormalMatrixUniform, false, this.nMatrix);
         /* draw the node after leaving it */
         gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.modelMatrix);
 
-        if (node instanceof Light) {
-            node.updatePosition(mvMatrix);
-        }
         node.draw(now);
 
         let children = node.getChildren();

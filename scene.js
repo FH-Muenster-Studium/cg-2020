@@ -36,20 +36,20 @@ export default class Scene {
         this.sunOrbit.addChild(this.earthOrbit);
 
         // Mars
-        /*this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
+        this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
         this.marsOrbitOrbitalPeriod = new OrbitalPeriod("Mars-Orbit-Orbital-Period", 687);
-        this.mars = new Orb("Mars", 6800, 25.19, 4.3, 1.03);
+        this.mars = new Orb("Mars", 6800, 25.19, 4.3, 1.03, undefined, this.createMarsMaterial());
         this.marsOrbitOrbitalPeriod.addChild(this.mars);
         this.marsOrbit.addChild(this.marsOrbitOrbitalPeriod);
-        //this.sunOrbit.addChild(this.marsOrbit);
+        this.sunOrbit.addChild(this.marsOrbit);
 
         // Moon
         this.moonOrbit = new Orbit("Moon-Orbit", 0.384, 5.15, 0);
         this.moonOrbitOrbitalPeriod = new OrbitalPeriod("Moon-Orbit-Orbital-Period", 27.32);
-        this.moon = new Orb("Moon", 3476, 1.54, 1, 27.32);
+        this.moon = new Orb("Moon", 3476, 1.54, 1, 27.32, undefined, this.createMoonMaterial());
         this.moonOrbitOrbitalPeriod.addChild(this.moon);
         this.moonOrbit.addChild(this.moonOrbitOrbitalPeriod);
-        this.earth.addChild(this.moonOrbit);*/
+        this.earth.addChild(this.moonOrbit);
 
         this.scene = new Component("Scene");
 
@@ -82,6 +82,26 @@ export default class Scene {
         let shininess = 0.6;
 
         return new Material("Earth-Material", emission, ambient, diffuse, specular, shininess);
+    }
+
+    createMarsMaterial() {
+        let emission = vec4.fromValues(0, 0, 0, 10);
+        let ambient = vec4.fromValues(0.1745, 0.01175, 0.01175, 10);
+        let diffuse = vec4.fromValues(0.61424, 0.04136, 0.04136, 10);
+        let specular = vec4.fromValues(0.727811, 0.626959, 0.626959, 10);
+        let shininess = 0.6;
+
+        return new Material("Mars-Material", emission, ambient, diffuse, specular, shininess);
+    }
+
+    createMoonMaterial() {
+        let emission = vec4.fromValues(0, 0, 0, 10);
+        let ambient = vec4.fromValues(0.19225, 0.19225, 0.19225, 10);
+        let diffuse = vec4.fromValues(0.50754, 0.50754, 0.50754, 10);
+        let specular = vec4.fromValues(0.508273, 0.508273, 0.508273, 10);
+        let shininess = 0.4;
+
+        return new Material("Moon-Material", emission, ambient, diffuse, specular, shininess);
     }
 
     draw(now) {
