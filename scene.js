@@ -25,7 +25,7 @@ export default class Scene {
         const specularSun = vec4.create();
         vec4.set(specularSun, 0.628281, 0.555802, 0.366065, 1.0);
         const shininessSun = 0.4;
-        const sunMaterial = new Material(emissionSun, ambientSun, diffuseSun, specularSun, shininessSun * 128.0);
+        const sunMaterial = new Material("Sun-Material", emissionSun, ambientSun, diffuseSun, specularSun, shininessSun * 128.0);
 
         // Sun
         this.sunOrbit = new Orbit("Sun-Orbit", 0, 0, 0);
@@ -41,7 +41,7 @@ export default class Scene {
         vec4.set(diffuse, 1.0, 1.0, 1.0, 1.0);
         const specular = vec4.create();
         vec4.set(specular, 1.0, 1.0, 1.0, 1.0);
-        const sunLight = new Light(position, ambient, diffuse, specular);
+        const sunLight = new Light("Sun-Light", position, ambient, diffuse, specular);
         this.sun.addChild(sunLight);
 
         // Earth
