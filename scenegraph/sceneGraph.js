@@ -1,6 +1,8 @@
 import MatrixStack from "../matrix-stack/matrixstack.js";
 import * as mat4 from "../gl-matrix/mat4.js";
-import {gl, shaderProgram} from "../webglstart.js";
+import {mat3} from "../gl-matrix/index.js";
+import {gl, shaderProgram, viewMatrix} from "../webglstart.js";
+import Light from "../light.js";
 
 export default class SceneGraph {
 
@@ -13,8 +15,6 @@ export default class SceneGraph {
     }
 
     drawTraversal(node, now) {
-        //node.printNodeData();
-
         mat4.multiply(this.modelMatrix, this.modelMatrix, node.modelMatrix);
         this.matrixStack.push(this.modelMatrix);
 
@@ -24,8 +24,18 @@ export default class SceneGraph {
 
         this.logString += "[";
 
+        let nMatrix = mat3.create();
+        let mvMatrix = mat4.create();
+
+        mat4.multiply(mvMatrix, viewMatrix, this.modelMatrix);
+        mat3.normalFromMat4(nMatrix, mvMatrix);
+        gl.uniformMatrix3fv(shaderProgram.uNormalMatrixUniform, false, nMatrix);
         /* draw the node after leaving it */
         gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.modelMatrix);
+
+        if (node instanceof Light) {
+            node.updatePosition(mvMatrix);
+        }
         node.draw(now);
 
         let children = node.getChildren();

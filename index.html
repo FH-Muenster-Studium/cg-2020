@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Triangle</title>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <script type="module">
         import {webGLStart} from "./webglstart.js";
 
@@ -11,33 +11,96 @@
 
     <!-- Vertex Shader-->
     <script id="shader-vs" type="x-shader/x-vertex">
+        attribute vec2 aTexPosition;
         attribute vec3 aVertexPosition;
-        //attribute vec4 aVertexColor;
-        uniform mat4 uModelMatrix;
-        uniform mat4 uViewMatrix;
-        uniform mat4 uProjectionMatrix;
+        attribute vec3 aNormalPosition;
 
-        //varying vec4 v_position;
-        varying vec4 vColor;
+        uniform mat4 uViewMatrix;
+        uniform mat4 uModelMatrix;
+        uniform mat4 uProjectionMatrix;
+        uniform mat3 uNormalMatrix;
+
+        varying vec2 vTexPos;
+        varying vec3 vVertexPos;
+        varying vec3 vNormalPos;
 
         void main(void) {
-            gl_Position = uProjectionMatrix * uViewMatrix * uModelMatrix * vec4(aVertexPosition, 1.0);
-            vColor = vec4(aVertexPosition, 1);//vec4(255, 255, 255, 1);//aVertexColor;
+            vec4 pos = uViewMatrix * uModelMatrix * vec4(aVertexPosition, 1.0);
+            gl_Position = uProjectionMatrix * pos;
+            vVertexPos = pos.xyz / pos.w;
+            vNormalPos = normalize(uNormalMatrix * aNormalPosition);
+            vTexPos = aTexPosition;
         }
-       </script>
+    </script>
 
     <!-- Fragment Shader-->
     <script id="shader-fs" type="x-shader/x-fragment">
         #ifdef GL_ES
-            precision mediump float;
+        precision mediump float;
         #endif
 
-        //varying vec4 v_position;
-        varying vec4 vColor;
+        // Lichtposition
+        uniform vec4 uLightPosition;
+        // Intensität Hintergrundbeleuchtung
+        uniform vec4 uLightAmbient;
+        // Stärke der Streuung
+        uniform vec4 uLightDiffuse;
+        // Lichtstärke
+        uniform vec4 uLightSpecular;
+
+        // Lichemission des Materials bzw. der Farbe
+        uniform vec4 uMaterialEmission;
+        // Materialkonstante der Hintergrundbeleuchtung
+        uniform vec4 uMaterialAmbient;
+        // Materialkonstante der Streuung
+        uniform vec4 uMaterialDiffuse;
+        // Materialkonstante der Spiegelung
+        uniform vec4 uMaterialSpecular;
+        // Matt/Spiegeln (Rau/Glatt)
+        uniform float uMaterialShininess;
+
+        varying vec3 vVertexPos;
+        varying vec3 vNormalPos;
 
         void main(void) {
-			      //vec4 color = v_position + vec4(0.75, 0.75, 0.0, 0.0);
- 			      gl_FragColor = vColor;//color;
+            //Berechnung emissiv, ausstrahlendes Licht vom Material
+            vec4 emissiv = uMaterialEmission;
+            //Berechnung ambient, Umgebungslicht
+            vec4 ambient = uMaterialAmbient * uLightAmbient;
+            vec4 diffuse;
+            vec4 specular;
+
+            // Position des Betrachters (Ausfallswinkel bei -Eye)
+            vec3 Eye = vec3(0.0, 0.0, 1.0);
+            // Einfallswinkel
+            vec3 L = vec3(0.0);
+            // Normale
+            vec3 N = normalize(vNormalPos);
+
+            //weit entferntes licht
+            if (uLightPosition.w == 0.0) {
+                L = normalize(vec3(uLightPosition));
+            }
+            else {
+                //nahe Lichtquelle
+                L = normalize(vec3(uLightPosition) - vVertexPos);
+            }
+
+            float diffLight = dot(N, L);
+            if (diffLight > 0.0) {
+                diffuse = vec4(vec3(diffLight), 1.0) * (uMaterialDiffuse * uLightDiffuse);
+                // Mittlerer wektor zwischen einfalls und ausfallswinkel
+                vec3 H = normalize(L + Eye);
+                float specLight = pow(max(dot(H, N), 0.0), uMaterialShininess);
+                //Spiegelndes Licht
+                specular = vec4(vec3(specLight), 1.0) * (uMaterialSpecular * uLightSpecular);
+            } else {
+                diffuse = vec4(0.0, 0.0, 0.0, 1.0);
+                specular = vec4(0.0, 0.0, 0.0, 1.0);
+            }
+
+            //Gesamtberechnung
+            gl_FragColor = emissiv + ambient + diffuse + specular;
         }
     </script>
 

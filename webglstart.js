@@ -40,8 +40,8 @@ function initGL(canvas) {
 }
 
 function initShaders() {
-    var fragmentShader = getShaderFromHTML("shader-fs");
-    var vertexShader = getShaderFromHTML("shader-vs");
+    const fragmentShader = getShaderFromHTML("shader-fs");
+    const vertexShader = getShaderFromHTML("shader-vs");
 
     shaderProgram = gl.createProgram();
     gl.attachShader(shaderProgram, vertexShader);
@@ -55,9 +55,14 @@ function initShaders() {
     gl.useProgram(shaderProgram);
 
     shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
-    //shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
+    shaderProgram.normalPositionAttribute = gl.getAttribLocation(shaderProgram, "aNormalPosition");
+    shaderProgram.texAttribute = gl.getAttribLocation(shaderProgram, "aTexPosition");
+
     gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
-    //gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
+    gl.enableVertexAttribArray(shaderProgram.normalPositionAttribute);
+    gl.enableVertexAttribArray(shaderProgram.texAttribute);
+
+    shaderProgram.uNormalMatrixUniform = gl.getUniformLocation(shaderProgram, "uNormalMatrix");
 
     shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uProjectionMatrix");
     shaderProgram.vMatrixUniform = gl.getUniformLocation(shaderProgram, "uViewMatrix");
@@ -65,13 +70,13 @@ function initShaders() {
 }
 
 function getShaderFromHTML(id) {
-    var shaderScript = document.getElementById(id);
+    const shaderScript = document.getElementById(id);
     if (!shaderScript) {
         return null;
     }
 
-    var str = "";
-    var k = shaderScript.firstChild;
+    let str = "";
+    let k = shaderScript.firstChild;
     while (k) {
         if (k.nodeType == 3) {
             str += k.textContent;
@@ -79,7 +84,7 @@ function getShaderFromHTML(id) {
         k = k.nextSibling;
     }
 
-    var shader;
+    let shader;
     if (shaderScript.type == "x-shader/x-fragment") {
         shader = gl.createShader(gl.FRAGMENT_SHADER);
     } else if (shaderScript.type == "x-shader/x-vertex") {
