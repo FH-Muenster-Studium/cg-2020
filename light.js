@@ -1,8 +1,8 @@
 import {shaderProgram, gl} from "./webglstart.js";
 import {mat4, vec4} from "./gl-matrix/index.js";
-import SGNode from "./scenegraph/sgnode.js";
+import Component from "./scenegraph/component.js";
 
-export default class Light extends SGNode {
+export default class Light extends Component {
 
     constructor(name, position, ambient, diffuse, specular) {
         super(name);
@@ -32,7 +32,7 @@ export default class Light extends SGNode {
         }
     }
 
-    draw() {
+    draw(now) {
         gl.uniform4fv(shaderProgram.lightPosition, this.worldposition);
         gl.uniform4fv(shaderProgram.lightAmbient, this.ambient);
         gl.uniform4fv(shaderProgram.lightDiffuse, this.diffuse);

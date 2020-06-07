@@ -21,7 +21,7 @@ export default class Orb extends Component {
         const rotationPeriodChild = new OrbitalPeriod(this.name + "-Orbital-Period", rotationPeriod, [0, 1, 0]);
         rotationPeriodChild.setRotation(tilt, [0, 0, -1]);
         this.addChild(rotationPeriodChild);
-        rotationPeriodChild.addChild(material);
+        this.addChild(material);
         if (name === "Moon") {
             rotationPeriodChild.addChild(new Cube(this.name + "-Cube", this.scale, this.color));
         } else {

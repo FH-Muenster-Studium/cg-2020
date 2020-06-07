@@ -14,38 +14,21 @@ export default class Scene {
 
     constructor() {
         this.then = 0;
-
-        // Sun Material
-        const emissionSun = vec4.create();
-        vec4.set(emissionSun, 1.0, 1.0, 1.0, 1.0);
-        const ambientSun = vec4.create();
-        vec4.set(ambientSun, 0.24725, 0.1995, 0.0745, 1.0);
-        const diffuseSun = vec4.create();
-        vec4.set(diffuseSun, 0.75164, 0.60648, 0.22648, 1.0);
-        const specularSun = vec4.create();
-        vec4.set(specularSun, 0.628281, 0.555802, 0.366065, 1.0);
-        const shininessSun = 0.4;
-        const sunMaterial = new Material("Sun-Material", emissionSun, ambientSun, diffuseSun, specularSun, shininessSun * 128.0);
-
         // Sun
         this.sunOrbit = new Orbit("Sun-Orbit", 0, 0, 0);
-        this.sun = new Orb("Sun", 25000, 7.25, 0, 25.38, undefined, sunMaterial);
+        this.sun = new Orb("Sun", 25000, 7.25, 0, 25.38, undefined, this.createSunMaterial());
         this.sunOrbit.addChild(this.sun);
 
         // Sun Light
-        const position = vec4.create();
-        vec4.set(position, 0.0, 0.0, 0.0, 1.0);
-        const ambient = vec4.create();
-        vec4.set(ambient, 1.0, 1.0, 1.0, 1.0);
-        const diffuse = vec4.create();
-        vec4.set(diffuse, 1.0, 1.0, 1.0, 1.0);
-        const specular = vec4.create();
-        vec4.set(specular, 1.0, 1.0, 1.0, 1.0);
+        const position = vec4.fromValues(0.0, 0.0, 0.0, 1.0);
+        const ambient = vec4.fromValues(0.5, 0.5, 0.5, 1);
+        const diffuse =vec4.fromValues(0.5, 0.5, 0.5, 1);
+        const specular = vec4.fromValues(1, 1, 1, 1);
         const sunLight = new Light("Sun-Light", position, ambient, diffuse, specular);
-        this.sun.addChild(sunLight);
+        this.sunOrbit.addChild(sunLight);
 
         // Earth
-        this.earthOrbit = new Orbit("Earth-Orbit", 150, 0, 0);
+        /*this.earthOrbit = new Orbit("Earth-Orbit", 150, 0, 0);
         this.earthOrbitOrbitalPeriod = new OrbitalPeriod("Earth-Orbit-Orbital-Period", 365);
         this.earth = new Orb("Earth", 12800, 23.45, 2.5, 1.0);
         this.earthOrbitOrbitalPeriod.addChild(this.earth);
@@ -66,7 +49,7 @@ export default class Scene {
         this.moon = new Orb("Moon", 3476, 1.54, 1, 27.32);
         this.moonOrbitOrbitalPeriod.addChild(this.moon);
         this.moonOrbit.addChild(this.moonOrbitOrbitalPeriod);
-        this.earth.addChild(this.moonOrbit);
+        this.earth.addChild(this.moonOrbit);*/
 
         this.scene = new Component("Scene");
 
@@ -79,6 +62,16 @@ export default class Scene {
         this.scene.addChild(this.sunOrbit);
 
         this.scenegraph = new SceneGraph(this.scene);
+    }
+
+    createSunMaterial() {
+        let emission = vec4.fromValues(1.0, 1.0, 0, 1);
+        let ambient = vec4.fromValues(0.24725, 0.1995, 0.0745, 1);
+        let diffuse = vec4.fromValues(0.75164, 0.60648, 0.22648, 1);
+        let specular = vec4.fromValues(0.628281, 0.555802, 0.366065, 1);
+        let shininess = 1;
+
+        return new Material("Sun-Material", emission, ambient, diffuse, specular, shininess);
     }
 
     draw(now) {

@@ -1,7 +1,7 @@
 import {shaderProgram, gl} from "./webglstart.js";
-import SGNode from "./scenegraph/sgnode.js";
+import Component from "./scenegraph/component.js";
 
-export default class Material extends SGNode {
+export default class Material extends Component {
     constructor(name, emission, ambient, diffuse, specular, shininess) {
         super(name);
         this.emission = emission;
@@ -17,7 +17,7 @@ export default class Material extends SGNode {
         shaderProgram.materialShininess = gl.getUniformLocation(shaderProgram, "uMaterialShininess");
     }
 
-    draw() {
+    draw(now) {
         gl.uniform4fv(shaderProgram.materialEmission, this.emission);
         gl.uniform4fv(shaderProgram.materialAmbient, this.ambient);
         gl.uniform4fv(shaderProgram.materialDiffuse, this.diffuse);
