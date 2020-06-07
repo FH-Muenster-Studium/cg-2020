@@ -28,15 +28,15 @@ export default class Scene {
         this.sunOrbit.addChild(sunLight);
 
         // Earth
-        /*this.earthOrbit = new Orbit("Earth-Orbit", 150, 0, 0);
+        this.earthOrbit = new Orbit("Earth-Orbit", 150, 0, 0);
         this.earthOrbitOrbitalPeriod = new OrbitalPeriod("Earth-Orbit-Orbital-Period", 365);
-        this.earth = new Orb("Earth", 12800, 23.45, 2.5, 1.0);
+        this.earth = new Orb("Earth", 12800, 23.45, 2.5, 1.0, undefined, this.createEarthMaterial());
         this.earthOrbitOrbitalPeriod.addChild(this.earth);
         this.earthOrbit.addChild(this.earthOrbitOrbitalPeriod);
-        //this.sunOrbit.addChild(this.earthOrbit);
+        this.sunOrbit.addChild(this.earthOrbit);
 
         // Mars
-        this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
+        /*this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
         this.marsOrbitOrbitalPeriod = new OrbitalPeriod("Mars-Orbit-Orbital-Period", 687);
         this.mars = new Orb("Mars", 6800, 25.19, 4.3, 1.03);
         this.marsOrbitOrbitalPeriod.addChild(this.mars);
@@ -72,6 +72,16 @@ export default class Scene {
         let shininess = 1;
 
         return new Material("Sun-Material", emission, ambient, diffuse, specular, shininess);
+    }
+
+    createEarthMaterial() {
+        let emission = vec4.fromValues(0, 0, 0, 10);
+        let ambient = vec4.fromValues(0.135, 0.2225, 0.1575, 10);
+        let diffuse = vec4.fromValues(0.54, 0.89, 0.63, 10);
+        let specular = vec4.fromValues(0.316228, 0.316228, 0.316228, 10);
+        let shininess = 0.6;
+
+        return new Material("Earth-Material", emission, ambient, diffuse, specular, shininess);
     }
 
     draw(now) {
