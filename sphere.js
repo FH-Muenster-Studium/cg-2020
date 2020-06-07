@@ -35,6 +35,7 @@ export default class Sphere extends SGNode {
         this.height = 2 * radius;
 
         this.vertexPositionData = [];
+        this.vN = [];
 
         const latitudeBands = 100;
         const longitudeBands = 100;
@@ -49,6 +50,11 @@ export default class Sphere extends SGNode {
                 const x = sinTheta * Math.sin(phi);
                 const y = cosTheta;
                 const z = sinTheta * Math.cos(phi);
+
+                this.vN.push(x);
+                this.vN.push(y);
+                this.vN.push(z);
+
                 this.vertexPositionData.push(radius * x);
                 this.vertexPositionData.push(radius * y);
                 this.vertexPositionData.push(radius * z);
@@ -85,12 +91,20 @@ export default class Sphere extends SGNode {
         this.indexBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indexData), gl.STATIC_DRAW);
+
+        this.normalPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vN), gl.STATIC_DRAW);
     }
 
     bindBuffers() {
-        // Binden des Buffers immer vor vertexAttribPointer() durchführen!
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
+
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexPositionBuffer);
         gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.normalPositionAttribute, 3, gl.FLOAT, false, 0, 0);
 
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
     }
