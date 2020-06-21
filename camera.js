@@ -57,9 +57,11 @@ export default class Camera extends Component {
         super.draw(now);
     }
 
-    forward() {
-        vec3.add(this.position, this.position, this.vNorm);
-        vec3.add(this.center, this.center, this.vNorm);
+    forward(scale = 1) {
+        const out = vec3.create();
+        vec3.mul(out, this.vNorm,[scale, scale, scale])
+        vec3.add(this.position, this.position, out);
+        vec3.add(this.center, this.center, out);
         mat4.lookAt(this.transformation, this.position, this.center, this.up);
     }
 
@@ -86,7 +88,7 @@ export default class Camera extends Component {
     }
 
     lookUp() {
-        if (this.rotationX < 1.0) {
+        if (this.rotationX < 0.5) {
             vec3.rotateY(this.center, this.center, this.position, -this.rotationY);
             vec3.rotateX(this.center, this.center, this.position, 0.05);
             vec3.rotateY(this.center, this.center, this.position, this.rotationY);
@@ -106,7 +108,7 @@ export default class Camera extends Component {
     }
 
     lookDown() {
-        if (this.rotationX > -1.0) {
+        if (this.rotationX > -0.5) {
             vec3.rotateY(this.center, this.center, this.position, -this.rotationY);
             vec3.rotateX(this.center, this.center, this.position, -0.05);
             vec3.rotateY(this.center, this.center, this.position, this.rotationY);

@@ -18,7 +18,7 @@ export default class KeyboardControl extends Component {
     onKeyPress(code) {
         switch (code) {
             case "w":
-                scene.camera.forward();
+                //scene.camera.forward();
                 break;
             case "a":
                 scene.camera.left();
@@ -29,7 +29,7 @@ export default class KeyboardControl extends Component {
             case "d":
                 scene.camera.right();
                 break;
-            case "ArrowUp":
+            /*case "ArrowUp":
                 scene.camera.lookUp();
                 break;
             case "ArrowDown":
@@ -40,11 +40,26 @@ export default class KeyboardControl extends Component {
                 break;
             case "ArrowRight":
                 scene.camera.lookRight();
-                break;
+                break;*/
         }
     }
 
     draw(now) {
+        if (this.downKeys.has("w")) {
+            scene.camera.forward(0.01);
+        }
+        if (this.downKeys.has("ArrowUp")) {
+            scene.camera.lookUp();
+        }
+        if (this.downKeys.has("ArrowDown")) {
+            scene.camera.lookDown();
+        }
+        if (this.downKeys.has("ArrowLeft")) {
+            scene.camera.lookLeft();
+        }
+        if (this.downKeys.has("ArrowRight")) {
+            scene.camera.lookRight();
+        }
         return super.draw(now);
     }
 }
