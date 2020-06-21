@@ -1,5 +1,5 @@
 import {viewMatrix, scene} from "./webglstart.js";
-import {mat4} from "./gl-matrix/index.js";
+import {mat4, vec3} from "./gl-matrix/index.js";
 import Component from "./scenegraph/component.js";
 
 export default class KeyboardControl extends Component {
@@ -17,8 +17,9 @@ export default class KeyboardControl extends Component {
 
     onKeyPress(code) {
         const r = 0.1;
+        console.log(code);
         switch (code) {
-            case "ArrowLeft":
+            /*case "ArrowLeft":
                 // left arrow
                 this.rotateY = r;
                 mat4.rotateY(viewMatrix, viewMatrix, this.rotateY);
@@ -51,15 +52,31 @@ export default class KeyboardControl extends Component {
             case "+":
                 if(scene.camera.fieldOfView > 0 && scene.camera.fieldOfView <= 180) {
                     scene.camera.fieldOfView -= 1;
-                    //scene.camera.moveProjection();
                 }
                 break;
             case "-":
                 if(scene.camera.fieldOfView >= 0 && scene.camera.fieldOfView < 180) {
                     scene.camera.fieldOfView += 1;
-                    //scene.camera.moveProjection();
                 }
+                break;*/
+            case "w":
+                scene.camera.forward();
                 break;
+            case "a":
+                scene.camera.left();
+                break;
+            case "s":
+                scene.camera.backward();
+                break;
+            case "d":
+                scene.camera.right();
+                break;
+            /*case "ArrowUp":
+                scene.camera.up();
+                break;
+            case "ArrowDown":
+                scene.camera.down();
+                break;*/
         }
     }
 }

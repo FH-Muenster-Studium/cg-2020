@@ -29,18 +29,81 @@ export default class Camera extends Component {
         this.near = 0.1;
         this.far = 100;
 
-        mat4.identity(modelMatrix);
-        mat4.fromTranslation(viewMatrix, [0, 0, this.distance]);
+        this.rotationX = 0.0;
+        this.rotationY = 0.0;
+
+        this.v = vec3.create();
+        this.vNorm = vec3.create();
+        vec3.sub(this.v, this.center, this.position);
+        vec3.normalize(this.vNorm, this.v);
+
+        if (this.up == null) {
+            this.up = vec3.fromValues(0, 1.0, 0);
+        }
+
+        // sets the transformation of the projection
+        this.transformation = mat4.create();
+        mat4.lookAt(this.transformation, this.position, this.center, this.up);
+
         mat4.identity(projectionMatrix);
-        mat4.mul(modelMatrix, modelMatrix, this.transformation);
     }
 
     draw(now) {
-        this.moveProjection();
+        mat4.identity(viewMatrix);
+        mat4.mul(viewMatrix, viewMatrix, this.transformation);
+        mat4.perspective(projectionMatrix, glMatrix.toRadian(this.fieldOfView), this.aspectRatio, this.near, this.far);
         super.draw(now);
     }
 
-    moveProjection() {
-        mat4.perspective(projectionMatrix, glMatrix.toRadian(this.fieldOfView), this.aspectRatio, this.near, this.far);
+    forward() {
+        vec3.add(this.position, this.position, this.vNorm);
+        vec3.add(this.center, this.center, this.vNorm);
+        mat4.lookAt(this.transformation, this.position, this.center, this.up);
     }
+
+    backward() {
+        vec3.sub(this.position, this.position, this.vNorm);
+        vec3.sub(this.center, this.center, this.vNorm);
+        mat4.lookAt(this.transformation, this.position, this.center, this.up);
+    }
+
+    left() {
+        const m = vec3.create();
+        vec3.cross(m, this.up, this.vNorm);
+        vec3.add(this.position, this.position, m);
+        vec3.add(this.center, this.center, m);
+        mat4.lookAt(this.transformation, this.position, this.center, this.up);
+    }
+
+    right() {
+        const m = vec3.create();
+        vec3.cross(m, this.up, this.vNorm);
+        vec3.sub(this.position, this.position, m);
+        vec3.sub(this.center, this.center, m);
+        mat4.lookAt(this.transformation, this.position, this.center, this.up);
+    }
+
+    /*up() {
+        if (this.rotationX < 1.0) {
+            vec3.rotateY(this.center, this.center, this.position, -this.rotationY);
+            vec3.rotateX(this.center, this.center, this.position, 0.05);
+            vec3.rotateY(this.center, this.center, this.position, this.rotationY);
+            this.rotationX += 0.1;
+            vec3.sub(this.v, this.center, this.position);
+            vec3.normalize(this.vNorm, this.v);
+            mat4.lookAt(this.transformation, this.position, this.center, this.up);
+        }
+    }
+
+    down() {
+        if (this.rotationX > -1.0) {
+            vec3.rotateY(this.center, this.center, this.position, -this.rotationY);
+            vec3.rotateX(this.center, this.center, this.position, -0.05);
+            vec3.rotateY(this.center, this.center, this.position, this.rotationY);
+            this.rotationX -= 0.1;
+            vec3.sub(this.v, this.center, this.position);
+            vec3.normalize(this.vNorm, this.v);
+            mat4.lookAt(this.transformation, this.position, this.center, this.up);
+        }
+    }*/
 }
