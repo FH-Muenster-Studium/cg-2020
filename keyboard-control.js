@@ -1,64 +1,22 @@
-import {viewMatrix, scene} from "./webglstart.js";
-import {mat4, vec3} from "./gl-matrix/index.js";
+import {scene} from "./webglstart.js";
 import Component from "./scenegraph/component.js";
 
 export default class KeyboardControl extends Component {
 
     constructor(name) {
         super(name);
-        this.rotateX = 0;
-        this.rotateY = 0;
-        this.rotateZ = 0;
-
+        this.downKeys = new Set();
         document.addEventListener('keydown', (event) =>  {
             this.onKeyPress(event.key);
+            this.downKeys.add(event.key);
+        });
+        document.addEventListener('keyup', (event) =>  {
+            this.downKeys.delete(event.key);
         });
     }
 
     onKeyPress(code) {
-        const r = 0.1;
-        console.log(code);
         switch (code) {
-            /*case "ArrowLeft":
-                // left arrow
-                this.rotateY = r;
-                mat4.rotateY(viewMatrix, viewMatrix, this.rotateY);
-                break;
-            case "ArrowRight":
-                // right arrow
-                this.rotateY = -r;
-                mat4.rotateY(viewMatrix, viewMatrix, this.rotateY);
-                break;
-            case "ArrowUp":
-                // up arrow
-                this.rotateX = r;
-                mat4.rotateX(viewMatrix, viewMatrix, this.rotateX);
-                break;
-            case "ArrowDown":
-                // down arrow
-                this.rotateX = -r;
-                mat4.rotateX(viewMatrix, viewMatrix, this.rotateX);
-                break;
-            case "e":
-                // e
-                this.rotateZ = r;
-                mat4.rotateZ(viewMatrix, viewMatrix, this.rotateZ);
-                break;    
-            case "q":
-                // q
-                this.rotateZ = -r;
-                mat4.rotateZ(viewMatrix, viewMatrix, this.rotateZ);
-                break;
-            case "+":
-                if(scene.camera.fieldOfView > 0 && scene.camera.fieldOfView <= 180) {
-                    scene.camera.fieldOfView -= 1;
-                }
-                break;
-            case "-":
-                if(scene.camera.fieldOfView >= 0 && scene.camera.fieldOfView < 180) {
-                    scene.camera.fieldOfView += 1;
-                }
-                break;*/
             case "w":
                 scene.camera.forward();
                 break;
@@ -84,5 +42,9 @@ export default class KeyboardControl extends Component {
                 scene.camera.lookRight();
                 break;
         }
+    }
+
+    draw(now) {
+        return super.draw(now);
     }
 }

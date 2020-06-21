@@ -36,6 +36,8 @@ export default class Camera extends Component {
         this.vNorm = vec3.create();
         vec3.sub(this.v, this.center, this.position);
         vec3.normalize(this.vNorm, this.v);
+        //this.vNormSmall = vec3.create();
+        //vec3.mul(this.vNormSmall, this.vNorm, [0.01, 0.01, 0.01]);
 
         if (this.up == null) {
             this.up = vec3.fromValues(0, 1.0, 0);
@@ -88,7 +90,7 @@ export default class Camera extends Component {
             vec3.rotateY(this.center, this.center, this.position, -this.rotationY);
             vec3.rotateX(this.center, this.center, this.position, 0.05);
             vec3.rotateY(this.center, this.center, this.position, this.rotationY);
-            this.rotationX += 0.1;
+            this.rotationX += 0.05;
             vec3.sub(this.v, this.center, this.position);
             vec3.normalize(this.vNorm, this.v);
             mat4.lookAt(this.transformation, this.position, this.center, this.up);
@@ -108,7 +110,7 @@ export default class Camera extends Component {
             vec3.rotateY(this.center, this.center, this.position, -this.rotationY);
             vec3.rotateX(this.center, this.center, this.position, -0.05);
             vec3.rotateY(this.center, this.center, this.position, this.rotationY);
-            this.rotationX -= 0.1;
+            this.rotationX -= 0.05;
             vec3.sub(this.v, this.center, this.position);
             vec3.normalize(this.vNorm, this.v);
             mat4.lookAt(this.transformation, this.position, this.center, this.up);
@@ -117,7 +119,7 @@ export default class Camera extends Component {
 
     lookRight() {
         vec3.rotateY(this.center, this.center, this.position, -0.05);
-        this.rotationY -= 0.1;
+        this.rotationY -= 0.05;
         vec3.sub(this.v, this.center, this.position);
         vec3.normalize(this.vNorm, this.v);
         mat4.lookAt(this.transformation, this.position, this.center, this.up);
