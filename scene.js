@@ -111,6 +111,8 @@ export default class Scene {
         this.scene.addChild(this.sunOrbit);
 
         this.scenegraph = new SceneGraph(this.scene);
+
+        this.isSlow = false;
     }
 
     //http://devernay.free.fr/cours/opengl/materials.html
@@ -155,10 +157,18 @@ export default class Scene {
         return new Material("Moon-Material", emission, ambient, diffuse, specular, shininess);
     }
 
+    toggleSlow() {
+        this.isSlow = !this.isSlow;
+    }
+
     draw(now) {
         if (isNaN(now)) return;
         const deltaTime = now - this.then;
         this.then = now;
-        this.scenegraph.draw(deltaTime * 1000000);
+        if (!this.isSlow) {
+            this.scenegraph.draw(deltaTime * 1000000);
+        } else {
+            this.scenegraph.draw(deltaTime);
+        }
     }
 }
