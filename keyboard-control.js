@@ -50,9 +50,11 @@ export default class KeyboardControl extends Component {
 
     draw(now) {
         if (this.downKeys.has("w")) {
-            console.log(now);
-            const currentScale = now / this.oneDistanceInMilliseconds;
+            let currentScale = now / this.oneDistanceInMilliseconds;
             console.log(currentScale);
+            if (currentScale < 0.01) {
+                currentScale = 0.01;
+            }
             scene.camera.forward(currentScale);
         }
         if (this.downKeys.has("ArrowUp")) {
