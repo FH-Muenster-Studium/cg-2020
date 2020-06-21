@@ -9,6 +9,7 @@ import OrbitalPeriod from "./orbital-period.js";
 import Light from "./light.js";
 import Material from "./material.js";
 import {vec4} from "./gl-matrix/index.js";
+import Texture from "./texture.js";
 
 export default class Scene {
 
@@ -16,7 +17,7 @@ export default class Scene {
         this.then = 0;
         // Sun
         this.sunOrbit = new Orbit("Sun-Orbit", 0, 0, 0);
-        this.sun = new Orb("Sun", 25000, 7.25, 0, 25.38, this.createSunMaterial());
+        this.sun = new Orb("Sun", 25000, 7.25, 0, 25.38, this.createSunMaterial(), new Texture("sun-texture", "./textures/sun.jpg"));
         this.sunOrbit.addChild(this.sun);
 
         // Sun Light
@@ -30,7 +31,7 @@ export default class Scene {
         // Earth
         this.earthOrbit = new Orbit("Earth-Orbit", 150, 0, 0);
         this.earthOrbitOrbitalPeriod = new OrbitalPeriod("Earth-Orbit-Orbital-Period", 365);
-        this.earth = new Orb("Earth", 12800, 23.45, 6, 1.0, this.createEarthMaterial());
+        this.earth = new Orb("Earth", 12800, 23.45, 6, 1.0, this.createEarthMaterial(), new Texture("Earth-texture", "./textures/earth.jpg"));
         this.earthOrbitOrbitalPeriod.addChild(this.earth);
         this.earthOrbit.addChild(this.earthOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.earthOrbit);
@@ -38,7 +39,7 @@ export default class Scene {
         // Mars
         this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
         this.marsOrbitOrbitalPeriod = new OrbitalPeriod("Mars-Orbit-Orbital-Period", 687);
-        this.mars = new Orb("Mars", 6800, 25.19, 8, 1.03, this.createMarsMaterial());
+        this.mars = new Orb("Mars", 6800, 25.19, 8, 1.03, this.createMarsMaterial(), new Texture("Mars-texture", "./textures/mars.jpg"));
         this.marsOrbitOrbitalPeriod.addChild(this.mars);
         this.marsOrbit.addChild(this.marsOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.marsOrbit);
@@ -46,7 +47,7 @@ export default class Scene {
         // Moon
         this.moonOrbit = new Orbit("Moon-Orbit", 0.384, 5.15, 0);
         this.moonOrbitOrbitalPeriod = new OrbitalPeriod("Moon-Orbit-Orbital-Period", 27.32);
-        this.moon = new Orb("Moon", 3476, 1.54, 1, 27.32, this.createMoonMaterial());
+        this.moon = new Orb("Moon", 3476, 1.54, 1, 27.32, this.createMoonMaterial(), new Texture("Moon-texture", "./textures/borg-cube.jpg"));
         this.moonOrbitOrbitalPeriod.addChild(this.moon);
         this.moonOrbit.addChild(this.moonOrbitOrbitalPeriod);
         this.earth.addChild(this.moonOrbit);
@@ -54,7 +55,7 @@ export default class Scene {
         // Merkur
         this.merkurOrbit = new Orbit("Merkur-Orbit", 60, 7.00, 0);
         this.merkurOrbitOrbitalPeriod = new OrbitalPeriod("Merkur-Orbit-Orbital-Period", 88);
-        this.merkur = new Orb("Merkur", 4900, 0, 2.5, 58.65, this.createMarsMaterial());
+        this.merkur = new Orb("Merkur", 4900, 0, 2.5, 58.65, this.createMarsMaterial(), new Texture("Merkur-texture", "./textures/mercury.jpg"));
         this.merkurOrbitOrbitalPeriod.addChild(this.merkur);
         this.merkurOrbit.addChild(this.merkurOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.merkurOrbit);
@@ -62,7 +63,7 @@ export default class Scene {
         // Venus
         this.venusOrbit = new Orbit("Venus-Orbit", 110, 3.40, 0);
         this.venusOrbitOrbitalPeriod = new OrbitalPeriod("Venus-Orbit-Orbital-Period", 226);
-        this.venus = new Orb("Venus", 12100, 177.36, 4.2, 243, this.createMarsMaterial());
+        this.venus = new Orb("Venus", 12100, 177.36, 4.2, 243, this.createMarsMaterial(), new Texture("Venus-texture", "./textures/venus.jpg"));
         this.venusOrbitOrbitalPeriod.addChild(this.venus);
         this.venusOrbit.addChild(this.venusOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.venusOrbit);
@@ -70,7 +71,7 @@ export default class Scene {
         // Jupiter
         this.jupiterOrbit = new Orbit("Jupiter-Orbit", 800, 1.04, 0);
         this.jupiterOrbitOrbitalPeriod = new OrbitalPeriod("Jupiter-Orbit-Orbital-Period", 4329);
-        this.jupiter = new Orb("Jupiter", 143000, 3.12, 20, 0.41 , this.createMarsMaterial());
+        this.jupiter = new Orb("Jupiter", 143000, 3.12, 20, 0.41 , this.createMarsMaterial(), new Texture("Jupiter-texture", "./textures/jupiter.jpg"));
         this.jupiterOrbitOrbitalPeriod.addChild(this.jupiter);
         this.jupiterOrbit.addChild(this.jupiterOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.jupiterOrbit);
@@ -78,7 +79,7 @@ export default class Scene {
         // Saturn
         this.saturnOrbit = new Orbit("Saturn-Orbit", 1400, 2.48, 0);
         this.saturnOrbitOrbitalPeriod = new OrbitalPeriod("Saturn-Orbit-Orbital-Period", 10753);
-        this.saturn = new Orb("Saturn", 120500, 26.73, 80, 0.43 , this.createMarsMaterial());
+        this.saturn = new Orb("Saturn", 120500, 26.73, 80, 0.43 , this.createMarsMaterial(), new Texture("Saturn-texture", "./textures/saturn.jpg"));
         this.saturnOrbitOrbitalPeriod.addChild(this.saturn);
         this.saturnOrbit.addChild(this.saturnOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.saturnOrbit);
@@ -86,7 +87,7 @@ export default class Scene {
         // Uranus
         this.uranusOrbit = new Orbit("Uranus-Orbit", 2800, 0.77, 0);
         this.uranusOrbitOrbitalPeriod = new OrbitalPeriod("Uranus-Orbit-Orbital-Period", 30664);
-        this.uranus = new Orb("Uranus", 51100, 97.86, 160, 0.75, this.createMarsMaterial());
+        this.uranus = new Orb("Uranus", 51100, 97.86, 160, 0.75, this.createMarsMaterial(), new Texture("Uranus-texture", "./textures/uranus.jpg"));
         this.uranusOrbitOrbitalPeriod.addChild(this.uranus);
         this.uranusOrbit.addChild(this.uranusOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.uranusOrbit);
@@ -94,7 +95,7 @@ export default class Scene {
         // Neptun
         this.neptunOrbit = new Orbit("Neptun-Orbit", 4500, 1.77, 0);
         this.neptunOrbitOrbitalPeriod = new OrbitalPeriod("Neptun-Orbit-Orbital-Period", 60152);
-        this.neptun = new Orb("Neptun", 49500, 29.58, 200, 0.80, this.createMarsMaterial());
+        this.neptun = new Orb("Neptun", 49500, 29.58, 200, 0.80, this.createMarsMaterial(), new Texture("Neptun-texture", "./textures/neptune.jpg"));
         this.neptunOrbitOrbitalPeriod.addChild(this.neptun);
         this.neptunOrbit.addChild(this.neptunOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.neptunOrbit);

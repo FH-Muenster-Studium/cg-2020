@@ -5,7 +5,7 @@ import OrbitalPeriod from "./orbital-period.js";
 
 export default class Orb extends Component {
 
-    constructor(name, diameter, tilt, distance, rotationPeriod, material) {
+    constructor(name, diameter, tilt, distance, rotationPeriod, material, texture) {
         super(name);
         this.diameter = diameter;
         this.distance = distance;
@@ -21,10 +21,11 @@ export default class Orb extends Component {
         rotationPeriodChild.setRotation(tilt, [0, 0, -1]);
         this.addChild(rotationPeriodChild);
         rotationPeriodChild.addChild(material);
+        material.addChild(texture);
         if (name === "Moon") {
-            material.addChild(new Cube(this.name + "-Cube", this.scale));
+            texture.addChild(new Cube(this.name + "-Cube", this.scale));
         } else {
-            material.addChild(new Sphere(this.name + "-Sphere", this.scale));
+            texture.addChild(new Sphere(this.name + "-Sphere", this.scale));
         }
     }
 }
