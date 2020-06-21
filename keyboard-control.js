@@ -71,12 +71,18 @@ export default class KeyboardControl extends Component {
             case "d":
                 scene.camera.right();
                 break;
-            /*case "ArrowUp":
-                scene.camera.up();
+            case "ArrowUp":
+                scene.camera.lookUp();
                 break;
             case "ArrowDown":
-                scene.camera.down();
-                break;*/
+                scene.camera.lookDown();
+                break;
+            case "ArrowLeft":
+                scene.camera.lookLeft();
+                break;
+            case "ArrowRight":
+                scene.camera.lookRight();
+                break;
         }
     }
 }

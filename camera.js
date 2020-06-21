@@ -83,7 +83,7 @@ export default class Camera extends Component {
         mat4.lookAt(this.transformation, this.position, this.center, this.up);
     }
 
-    /*up() {
+    lookUp() {
         if (this.rotationX < 1.0) {
             vec3.rotateY(this.center, this.center, this.position, -this.rotationY);
             vec3.rotateX(this.center, this.center, this.position, 0.05);
@@ -95,7 +95,15 @@ export default class Camera extends Component {
         }
     }
 
-    down() {
+    lookLeft() {
+        vec3.rotateY(this.center, this.center, this.position, 0.05);
+        this.rotationY += 0.05;
+        vec3.sub(this.v, this.center, this.position);
+        vec3.normalize(this.vNorm, this.v);
+        mat4.lookAt(this.transformation, this.position, this.center, this.up);
+    }
+
+    lookDown() {
         if (this.rotationX > -1.0) {
             vec3.rotateY(this.center, this.center, this.position, -this.rotationY);
             vec3.rotateX(this.center, this.center, this.position, -0.05);
@@ -105,5 +113,13 @@ export default class Camera extends Component {
             vec3.normalize(this.vNorm, this.v);
             mat4.lookAt(this.transformation, this.position, this.center, this.up);
         }
-    }*/
+    }
+
+    lookRight() {
+        vec3.rotateY(this.center, this.center, this.position, -0.05);
+        this.rotationY -= 0.1;
+        vec3.sub(this.v, this.center, this.position);
+        vec3.normalize(this.vNorm, this.v);
+        mat4.lookAt(this.transformation, this.position, this.center, this.up);
+    }
 }
