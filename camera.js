@@ -27,7 +27,7 @@ export default class Camera extends Component {
         this.fieldOfView = 60;
         this.aspectRatio = gl.viewportWidth / gl.viewportHeight;
         this.near = 0.1;
-        this.far = 100;
+        this.far = 500;
 
         this.rotationX = 0.0;
         this.rotationY = 0.0;
