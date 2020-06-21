@@ -14,6 +14,7 @@ export default class KeyboardControl extends Component {
             this.downKeys.delete(event.key);
         });
         this.oneDistanceInMilliseconds = 100000000.0;
+        this.oneDistanceInMillisecondsSlow = 100.0;
     }
 
     onKeyPress(code) {
@@ -51,10 +52,10 @@ export default class KeyboardControl extends Component {
     draw(now) {
         if (this.downKeys.has("w")) {
             let currentScale = now / this.oneDistanceInMilliseconds;
-            console.log(currentScale);
-            if (currentScale < 0.01) {
-                currentScale = 0.01;
+            if (scene.isSlow) {
+                currentScale = now / this.oneDistanceInMillisecondsSlow;
             }
+            console.log(currentScale);
             scene.camera.forward(currentScale);
         }
         if (this.downKeys.has("ArrowUp")) {
