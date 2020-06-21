@@ -83,6 +83,21 @@ export default class Scene {
         this.saturnOrbit.addChild(this.saturnOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.saturnOrbit);
 
+        // Uranus
+        this.uranusOrbit = new Orbit("Uranus-Orbit", 2800, 0.77, 0);
+        this.uranusOrbitOrbitalPeriod = new OrbitalPeriod("Uranus-Orbit-Orbital-Period", 30664);
+        this.uranus = new Orb("Uranus", 51100, 97.86, 160, 0.75, this.createMarsMaterial());
+        this.uranusOrbitOrbitalPeriod.addChild(this.uranus);
+        this.uranusOrbit.addChild(this.uranusOrbitOrbitalPeriod);
+        this.sunOrbit.addChild(this.uranusOrbit);
+
+        // Neptun
+        this.neptunOrbit = new Orbit("Neptun-Orbit", 4500, 1.77, 0);
+        this.neptunOrbitOrbitalPeriod = new OrbitalPeriod("Neptun-Orbit-Orbital-Period", 60152);
+        this.neptun = new Orb("Neptun", 49500, 29.58, 200, 0.80, this.createMarsMaterial());
+        this.neptunOrbitOrbitalPeriod.addChild(this.neptun);
+        this.neptunOrbit.addChild(this.neptunOrbitOrbitalPeriod);
+        this.sunOrbit.addChild(this.neptunOrbit);
 
         this.scene = new Component("Scene");
 
