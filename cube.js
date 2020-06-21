@@ -3,7 +3,7 @@ import {vec3} from "./gl-matrix/index.js";
 
 export default class Cube extends Cuboid {
 
-    constructor(name, diameter, color) {
+    constructor(name, diameter) {
         const extent = diameter / 2;
         let ver1 = vec3.create();
         let ver2 = vec3.create();
@@ -23,6 +23,6 @@ export default class Cube extends Cuboid {
         vec3.set(ver7, extent, extent, -extent);
         vec3.set(ver8, extent, -extent, -extent);
 
-        super(name, ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8, color);
+        super(name, ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8);
     }
 }

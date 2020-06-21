@@ -46,7 +46,7 @@ export default class Triangle extends SGNode {
         gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, 3, gl.FLOAT, false, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
-        gl.vertexAttribPointer(shaderProgram.normalPositionAttribute, 3, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(shaderProgram.normalPositionAttribute, 3, gl.FLOAT, false, 3 * Float32Array.BYTES_PER_ELEMENT, 0);
 
 
         gl.drawArrays(gl.TRIANGLES, 0, 3);

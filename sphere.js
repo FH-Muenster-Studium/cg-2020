@@ -35,7 +35,7 @@ export default class Sphere extends SGNode {
         this.height = 2 * radius;
 
         this.vertexPositionData = [];
-        this.vN = [];
+        this.vertexNormals = [];
 
         const latitudeBands = 100;
         const longitudeBands = 100;
@@ -51,9 +51,9 @@ export default class Sphere extends SGNode {
                 const y = cosTheta;
                 const z = sinTheta * Math.cos(phi);
 
-                this.vN.push(x);
-                this.vN.push(y);
-                this.vN.push(z);
+                this.vertexNormals.push(x);
+                this.vertexNormals.push(y);
+                this.vertexNormals.push(z);
 
                 this.vertexPositionData.push(radius * x);
                 this.vertexPositionData.push(radius * y);
@@ -94,7 +94,7 @@ export default class Sphere extends SGNode {
 
         this.normalPositionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.normalPositionBuffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vN), gl.STATIC_DRAW);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexNormals), gl.STATIC_DRAW);
     }
 
     bindBuffers() {

@@ -11,11 +11,6 @@ export default class Light extends Component {
         this.ambient = ambient;
         this.diffuse = diffuse;
         this.specular = specular;
-        this.isDirectionalLight = this.position[3] === 0;
-
-        if (this.isDirectionalLight) {
-            this.position[3] = 1;
-        }
 
         shaderProgram.lightPosition = gl.getUniformLocation(shaderProgram, "uLightPosition");
         shaderProgram.lightAmbient = gl.getUniformLocation(shaderProgram, "uLightAmbient");
@@ -23,13 +18,9 @@ export default class Light extends Component {
         shaderProgram.lightSpecular = gl.getUniformLocation(shaderProgram, "uLightSpecular");
     }
 
+    // Einfallswinkel des Blickwinkels der übergeben wird
     updatePosition(mvMatrix) {
-
         mat4.mul(this.worldposition, mvMatrix, this.position);
-
-        if (this.isDirectionalLight) {
-            this.worldposition[3] = 0;
-        }
     }
 
     draw(now) {

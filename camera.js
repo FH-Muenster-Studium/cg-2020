@@ -43,5 +43,4 @@ export default class Camera extends Component {
     moveProjection() {
         mat4.perspective(projectionMatrix, glMatrix.toRadian(this.fieldOfView), this.aspectRatio, this.near, this.far);
     }
-
 }

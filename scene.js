@@ -16,13 +16,13 @@ export default class Scene {
         this.then = 0;
         // Sun
         this.sunOrbit = new Orbit("Sun-Orbit", 0, 0, 0);
-        this.sun = new Orb("Sun", 25000, 7.25, 0, 25.38, undefined, this.createSunMaterial());
+        this.sun = new Orb("Sun", 25000, 7.25, 0, 25.38, this.createSunMaterial());
         this.sunOrbit.addChild(this.sun);
 
         // Sun Light
         const position = vec4.fromValues(0.0, 0.0, 0.0, 1.0);
         const ambient = vec4.fromValues(0.5, 0.5, 0.5, 1);
-        const diffuse =vec4.fromValues(0.5, 0.5, 0.5, 1);
+        const diffuse = vec4.fromValues(0.5, 0.5, 0.5, 1);
         const specular = vec4.fromValues(1, 1, 1, 1);
         const sunLight = new Light("Sun-Light", position, ambient, diffuse, specular);
         this.sunOrbit.addChild(sunLight);
@@ -30,7 +30,7 @@ export default class Scene {
         // Earth
         this.earthOrbit = new Orbit("Earth-Orbit", 150, 0, 0);
         this.earthOrbitOrbitalPeriod = new OrbitalPeriod("Earth-Orbit-Orbital-Period", 365);
-        this.earth = new Orb("Earth", 12800, 23.45, 2.5, 1.0, undefined, this.createEarthMaterial());
+        this.earth = new Orb("Earth", 12800, 23.45, 6, 1.0, this.createEarthMaterial());
         this.earthOrbitOrbitalPeriod.addChild(this.earth);
         this.earthOrbit.addChild(this.earthOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.earthOrbit);
@@ -38,7 +38,7 @@ export default class Scene {
         // Mars
         this.marsOrbit = new Orbit("Mars-Orbit", 230, 1.85, 0);
         this.marsOrbitOrbitalPeriod = new OrbitalPeriod("Mars-Orbit-Orbital-Period", 687);
-        this.mars = new Orb("Mars", 6800, 25.19, 4.3, 1.03, undefined, this.createMarsMaterial());
+        this.mars = new Orb("Mars", 6800, 25.19, 8, 1.03, this.createMarsMaterial());
         this.marsOrbitOrbitalPeriod.addChild(this.mars);
         this.marsOrbit.addChild(this.marsOrbitOrbitalPeriod);
         this.sunOrbit.addChild(this.marsOrbit);
@@ -46,10 +46,43 @@ export default class Scene {
         // Moon
         this.moonOrbit = new Orbit("Moon-Orbit", 0.384, 5.15, 0);
         this.moonOrbitOrbitalPeriod = new OrbitalPeriod("Moon-Orbit-Orbital-Period", 27.32);
-        this.moon = new Orb("Moon", 3476, 1.54, 1, 27.32, undefined, this.createMoonMaterial());
+        this.moon = new Orb("Moon", 3476, 1.54, 1, 27.32, this.createMoonMaterial());
         this.moonOrbitOrbitalPeriod.addChild(this.moon);
         this.moonOrbit.addChild(this.moonOrbitOrbitalPeriod);
         this.earth.addChild(this.moonOrbit);
+
+        // Merkur
+        this.merkurOrbit = new Orbit("Merkur-Orbit", 60, 7.00, 0);
+        this.merkurOrbitOrbitalPeriod = new OrbitalPeriod("Merkur-Orbit-Orbital-Period", 88);
+        this.merkur = new Orb("Merkur", 4900, 0, 2.5, 58.65, this.createMarsMaterial());
+        this.merkurOrbitOrbitalPeriod.addChild(this.merkur);
+        this.merkurOrbit.addChild(this.merkurOrbitOrbitalPeriod);
+        this.sunOrbit.addChild(this.merkurOrbit);
+
+        // Venus
+        this.venusOrbit = new Orbit("Venus-Orbit", 110, 3.40, 0);
+        this.venusOrbitOrbitalPeriod = new OrbitalPeriod("Venus-Orbit-Orbital-Period", 226);
+        this.venus = new Orb("Venus", 12100, 177.36, 4.2, 243, this.createMarsMaterial());
+        this.venusOrbitOrbitalPeriod.addChild(this.venus);
+        this.venusOrbit.addChild(this.venusOrbitOrbitalPeriod);
+        this.sunOrbit.addChild(this.venusOrbit);
+
+        // Jupiter
+        this.jupiterOrbit = new Orbit("Jupiter-Orbit", 800, 1.04, 0);
+        this.jupiterOrbitOrbitalPeriod = new OrbitalPeriod("Jupiter-Orbit-Orbital-Period", 4329);
+        this.jupiter = new Orb("Jupiter", 143000, 3.12, 20, 0.41 , this.createMarsMaterial());
+        this.jupiterOrbitOrbitalPeriod.addChild(this.jupiter);
+        this.jupiterOrbit.addChild(this.jupiterOrbitOrbitalPeriod);
+        this.sunOrbit.addChild(this.jupiterOrbit);
+
+        // Saturn
+        this.saturnOrbit = new Orbit("Saturn-Orbit", 1400, 2.48, 0);
+        this.saturnOrbitOrbitalPeriod = new OrbitalPeriod("Saturn-Orbit-Orbital-Period", 10753);
+        this.saturn = new Orb("Saturn", 120500, 26.73, 80, 0.43 , this.createMarsMaterial());
+        this.saturnOrbitOrbitalPeriod.addChild(this.saturn);
+        this.saturnOrbit.addChild(this.saturnOrbitOrbitalPeriod);
+        this.sunOrbit.addChild(this.saturnOrbit);
+
 
         this.scene = new Component("Scene");
 
@@ -63,6 +96,8 @@ export default class Scene {
 
         this.scenegraph = new SceneGraph(this.scene);
     }
+
+    //http://devernay.free.fr/cours/opengl/materials.html
 
     createSunMaterial() {
         let emission = vec4.fromValues(1.0, 1.0, 0, 1);

@@ -18,7 +18,7 @@ export default class SceneGraph {
         mat4.multiply(this.modelMatrix, this.modelMatrix, node.modelMatrix);
         this.matrixStack.push(this.modelMatrix);
 
-        this.logString += "{"
+        this.logString += "{";
 
         this.logString += node.name;
 
