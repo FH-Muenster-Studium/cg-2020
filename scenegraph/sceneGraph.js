@@ -43,14 +43,13 @@ export default class SceneGraph {
         for (let c = 0; c < children.length; c++) {
             this.drawTraversal(children[c], now);
         }
-        this.matrixStack.pop();
 
         this.logString += "]";
 
         this.logString += "}";
 
         /* set the local matrix to the matrix of the parent */
-        this.modelMatrix = this.matrixStack.top();
+        this.modelMatrix = this.matrixStack.pop();
     }
 
     draw(now) {

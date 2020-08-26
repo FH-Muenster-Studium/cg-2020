@@ -13,12 +13,4 @@ export default class MatrixStack {
     pop() {
         return mat4.clone(this.stack.pop());
     }
-
-    top() {
-        if (this.stack.length > 1)
-            return mat4.clone(this.stack[this.stack.length - 1]);
-        else {
-            return mat4.create();
-        }
-    }
 }
