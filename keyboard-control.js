@@ -55,7 +55,6 @@ export default class KeyboardControl extends Component {
             if (scene.isSlow) {
                 currentScale = now / this.oneDistanceInMillisecondsSlow;
             }
-            console.log(currentScale);
             scene.camera.forward(currentScale);
         }
         if (this.downKeys.has("ArrowUp")) {

@@ -1,7 +1,7 @@
 import MatrixStack from "../matrix-stack/matrixstack.js";
 import * as mat4 from "../gl-matrix/mat4.js";
 import {mat3} from "../gl-matrix/index.js";
-import {gl, shaderProgram, viewMatrix} from "../webglstart.js";
+import {gl, shaderProgram} from "../webglstart.js";
 import Light from "../light.js";
 
 export default class SceneGraph {
@@ -24,18 +24,15 @@ export default class SceneGraph {
 
         this.logString += "[";
 
-        this.mvMatrix = mat4.create();
-        mat4.mul(this.mvMatrix, viewMatrix, this.modelMatrix);
-
         if (node instanceof Light) {
-            node.updatePosition(this.mvMatrix);
+            node.updatePosition(this.modelMatrix);
         }
 
         this.nMatrix = mat3.create();
-        mat3.normalFromMat4(this.nMatrix, this.mvMatrix);
+        mat3.normalFromMat4(this.nMatrix, this.modelMatrix);
         gl.uniformMatrix3fv(shaderProgram.uNormalMatrixUniform, false, this.nMatrix);
         /* draw the node after leaving it */
-        gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, this.modelMatrix);
+        gl.uniformMatrix4fv(shaderProgram.modelViewMatrixUniform, false, this.modelMatrix);
 
         node.draw(now);
 
