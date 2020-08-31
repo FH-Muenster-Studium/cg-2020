@@ -26,7 +26,9 @@ export default class Camera extends Component {
         // Set the parameter for setting/changing the projectionMatrix
         this.fieldOfView = 60;
         this.aspectRatio = gl.viewportWidth / gl.viewportHeight;
-        this.near = 0.1;
+        // Near plane weiter ran = ich zoome raus ()
+        // Near plane weiter weg = ich zoome rein
+        this.near = .1;
         this.far = 500;
 
         this.rotationX = 0.0;
