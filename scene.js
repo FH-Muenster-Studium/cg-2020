@@ -104,11 +104,12 @@ export default class Scene {
 
         this.position = vec3.fromValues(0.0, 0.0, 0.0);
         this.camera = new Camera("Camera", this.position, -15);
+        this.scene.addChild(this.camera);
+
         this.keyboardControl = new KeyboardControl("Keyboard");
 
-        this.scene.addChild(this.camera);
         this.scene.addChild(this.keyboardControl);
-        this.scene.addChild(this.sunOrbit);
+        this.camera.addChild(this.sunOrbit);
 
         this.scenegraph = new SceneGraph(this.scene);
 

@@ -46,6 +46,8 @@ export default class Sphere extends SGNode {
             const theta = i * Math.PI / latitudeBands;
             const sinTheta = Math.sin(theta);
             const cosTheta = Math.cos(theta);
+
+            const v = i / latitudeBands;  // Bessere/einfachere Variante mit prozentualem Anteil
             for (let j = 0; j <= longitudeBands; j++) {
                 const phi = j * 2 * Math.PI / longitudeBands;
                 const x = sinTheta * Math.sin(phi);
@@ -61,7 +63,6 @@ export default class Sphere extends SGNode {
                 this.vertexPositionData.push(radius * z);
 
                 const u = j / longitudeBands; // Bessere/einfachere Variante mit prozentualem Anteil
-                const v = i / latitudeBands;  // Bessere/einfachere Variante mit prozentualem Anteil
 
                 this.uv.push(u);
                 this.uv.push(v);

@@ -5,8 +5,7 @@ import Scene from "./scene.js";
 var gl;
 var scene;
 var shaderProgram;
-var modelMatrix = mat4.create();
-var viewMatrix = mat4.create();
+var modelViewMatrix = mat4.create();
 var projectionMatrix = mat4.create();
 
 // Globale Funktionen:
@@ -64,9 +63,8 @@ function initShaders() {
 
     shaderProgram.uNormalMatrixUniform = gl.getUniformLocation(shaderProgram, "uNormalMatrix");
 
-    shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uProjectionMatrix");
-    shaderProgram.vMatrixUniform = gl.getUniformLocation(shaderProgram, "uViewMatrix");
-    shaderProgram.mMatrixUniform = gl.getUniformLocation(shaderProgram, "uModelMatrix");
+    shaderProgram.projectionMatrixUniform = gl.getUniformLocation(shaderProgram, "uProjectionMatrix");
+    shaderProgram.modelViewMatrixUniform = gl.getUniformLocation(shaderProgram, "uModelViewMatrix");
 }
 
 function getShaderFromHTML(id) {
@@ -118,9 +116,8 @@ function drawScene(now) {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, projectionMatrix);
-    gl.uniformMatrix4fv(shaderProgram.vMatrixUniform, false, viewMatrix);
-    gl.uniformMatrix4fv(shaderProgram.mMatrixUniform, false, modelMatrix);
+    gl.uniformMatrix4fv(shaderProgram.projectionMatrixUniform, false, projectionMatrix);
+    gl.uniformMatrix4fv(shaderProgram.modelViewMatrixUniform, false, modelViewMatrix);
 
     scene.draw(now);
     //console.log(fps);
@@ -128,4 +125,4 @@ function drawScene(now) {
     window.requestAnimationFrame(drawScene);
 }
 
-export {gl, shaderProgram, modelMatrix, viewMatrix, projectionMatrix, scene};
+export {gl, shaderProgram, projectionMatrix, scene};
